@@ -13,6 +13,7 @@
 
 # reach
 /src/reach
+/src/build
 
 # misc
 .DS_Store
