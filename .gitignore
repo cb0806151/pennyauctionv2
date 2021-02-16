@@ -11,6 +11,9 @@
 # production
 /build
 
+# reach
+/src/reach
+
 # misc
 .DS_Store
 .env.local
