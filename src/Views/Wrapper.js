@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import GlobalContext from './../Components/GlobalContext';
-import Exports from './Exports';
+import GlobalContext from '../Util/GlobalContext';
+import Exports from '../Util/Exports';
 
 function Wrapper(props) {
 

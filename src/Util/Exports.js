@@ -1,5 +1,5 @@
-import Test from './Test';
-import App from './App';
+import Test from '../Views/Test';
+import App from '../Views/App';
 
 const exports = {
     'Test': Test,

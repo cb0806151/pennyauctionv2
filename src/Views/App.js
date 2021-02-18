@@ -1,7 +1,7 @@
 import './App.css';
 import { useContext } from 'react';
 import * as stdlib from '@reach-sh/stdlib/ETH';
-import GlobalContext from './../Components/GlobalContext';
+import GlobalContext from '../Util/GlobalContext';
 
 function App() {
   const context = useContext(GlobalContext);
