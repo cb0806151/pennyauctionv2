@@ -1,11 +1,27 @@
 import React from 'react';
-import './Navbar.css';
+import ConnectWallet from './ConnectWallet'
 
-function Navbar(props) {
+function Navbar() {
+
+    var titleSpace = {
+        flexGrow: 1,
+        textAlign: 'left',
+    };
+
+    var navbar = {
+        background: 'black',
+        width: '100%',
+        height: '10vh',
+        display: 'flex',
+        alignItems: 'center',
+    }
 
     return (
-        <div className="Navbar">
-            {props.children}
+        <div style={navbar}>
+            <div style={titleSpace}>
+                <h1>The Reach Penny Auction</h1>
+            </div>
+            <ConnectWallet></ConnectWallet>
         </div>
     )
 }
