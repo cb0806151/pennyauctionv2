@@ -1,5 +1,5 @@
 import './App.css';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import GlobalContext from '../Util/GlobalContext';
 
 function App() {

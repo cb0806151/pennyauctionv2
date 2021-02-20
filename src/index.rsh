@@ -1,7 +1,7 @@
 'reach 0.1';
 
 export const main =
-    Reach.app(
+    Reach.App(
         {},
         [
             ['Auctioneer', {}], 
