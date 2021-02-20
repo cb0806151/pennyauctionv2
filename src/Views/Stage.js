@@ -13,9 +13,9 @@ function Stage() {
     }
 
     return (
-        <div className="App">
+        <div>
             <Navbar />
-            <header className="App-header">
+            <header>
                 {renderPage(state.page, Exports)}
             </header>
         </div>

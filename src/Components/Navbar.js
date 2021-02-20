@@ -4,6 +4,7 @@ import ConnectWallet from './ConnectWallet'
 function Navbar() {
 
     var titleSpace = {
+        color: 'white',
         flexGrow: 1,
         textAlign: 'left',
     };

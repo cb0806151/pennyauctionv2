@@ -26,7 +26,7 @@ const reducer = (state, action) => {
 const Provider = ({ children }) => {
     const [state, dispatch] = React.useReducer(reducer, { 
         balance: 0, 
-        page: 'Test',
+        page: 'Home',
         account: undefined,
     })
 

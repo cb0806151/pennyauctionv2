@@ -7,7 +7,7 @@ function Test() {
     return (
         <div>
             <h1>Test page</h1>
-            <button onClick={() => dispatch({var: 'page', type: 'set', value: 'App'})}>Go to App?</button>
+            <button onClick={() => dispatch({var: 'page', type: 'set', value: 'Home'})}>Go to App?</button>
         </div>
     )
 }
