@@ -3,7 +3,7 @@ import TabletButton from '../Components/TabletButton'
 import { CoreState } from '../Util/CoreState';
 
 
-const Home = () => {
+export default function Home() {
     const dispatch = useContext(CoreState.Dispatch)
 
     let panelContainer = {
@@ -25,5 +25,3 @@ const Home = () => {
         </div>
     )
 }
-
-export default Home;

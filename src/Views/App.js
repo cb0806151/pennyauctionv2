@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
 
-function App() {
+export default function App() {
     const dispatch = useContext(CoreState.Dispatch)
 
     return (
@@ -10,5 +10,3 @@ function App() {
       </div>
     )
 }
-
-export default App;

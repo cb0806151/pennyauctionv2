@@ -1,7 +1,7 @@
 import React from 'react';
 import ConnectWallet from './ConnectWallet'
 
-function Navbar() {
+export default function Navbar() {
 
     var titleSpace = {
         color: 'white',
@@ -26,5 +26,3 @@ function Navbar() {
         </div>
     )
 }
-
-export default Navbar;

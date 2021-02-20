@@ -4,7 +4,7 @@ import Exports from '../Util/Exports';
 import Navbar from '../Components/Navbar';
 
 
-function Stage() {
+export default function Stage() {
     const state = useContext(CoreState.State)
 
     const renderPage = (pageName, Pages) => {
@@ -20,7 +20,4 @@ function Stage() {
             </header>
         </div>
     )
-
 }
-
-export default Stage;

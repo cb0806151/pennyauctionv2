@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TabletButton = (props) => {
+export default function TabletButton(props) {
     let tabletPanel = {
         background: 'darkgray',
         border: '1px solid lime',
@@ -17,5 +17,3 @@ const TabletButton = (props) => {
         </div>
     )
 }
-
-export default TabletButton;

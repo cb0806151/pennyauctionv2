@@ -2,7 +2,7 @@ import * as stdlib from '@reach-sh/stdlib/ETH';
 import React, { useContext, useState } from 'react';
 import { CoreState } from '../Util/CoreState';
 
-function ConnectWallet() {
+export default function ConnectWallet() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
     const fundInput = React.createRef(0);
@@ -70,5 +70,3 @@ function ConnectWallet() {
         </div>
     )
 }
-
-export default ConnectWallet;
