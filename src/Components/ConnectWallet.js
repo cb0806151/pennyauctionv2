@@ -1,9 +1,10 @@
 import * as stdlib from '@reach-sh/stdlib/ETH';
 import React, { useContext, useState } from 'react';
-import GlobalContext from '../Util/GlobalContext';
+import { CoreState } from '../Util/CoreState';
 
 function ConnectWallet() {
-    const context = useContext(GlobalContext);
+    const state = useContext(CoreState.State)
+    const dispatch = useContext(CoreState.Dispatch)
     const fundInput = React.createRef(0);
 
     const [processing, setProcessing] = useState(false);
@@ -13,16 +14,14 @@ function ConnectWallet() {
     const connectWallet = async () => {
         setProcessing(true);
         const account = await stdlib.getDefaultAccount();
-        context.setCurrentAccount(account);
-        const balanceAtomic = await stdlib.balanceOf(account);
-        const balance = stdlib.formatCurrency(balanceAtomic, 4);
-        context.setCurrentBalance(balance);
+        dispatch({var: 'account', type: 'set', value: account})
+        await getWalletBalance(account);
     }
 
-    const getWalletBalance = async () => {
-        const balanceAtomic = await stdlib.balanceOf(context.account);
-        const balance = stdlib.formatCurrency(balanceAtomic, 4);
-        context.setCurrentBalance(balance);
+    const getWalletBalance = async (acc) => {
+        let balanceAtomic = await stdlib.balanceOf(acc);
+        let balance = stdlib.formatCurrency(balanceAtomic, 4);
+        dispatch({var: 'balance', type: 'set', value: balance})
     }
 
     const toggleDropdown = async () => {
@@ -35,9 +34,8 @@ function ConnectWallet() {
     }
 
     const depositFunds = async (funds) => {
-        await stdlib.transfer(faucet, context.account, stdlib.parseCurrency(funds));
-        await getWalletBalance();
-        fundInput.current.value = fundInput.current.defaultValue
+        await stdlib.transfer(faucet, state.account, stdlib.parseCurrency(funds));
+        dispatch({var: 'balance', type: 'increment', value: funds})
     }
 
     let dropdownPanel = {
@@ -50,7 +48,7 @@ function ConnectWallet() {
     return (
         <div>
             {
-                (context.account === undefined) 
+                (state.account === undefined) 
                     ? 
                 <button disabled={processing} onClick={() => connectWallet()}>Connect Wallet</button>
                     :
@@ -60,7 +58,7 @@ function ConnectWallet() {
                 dropdownVisible
                     ?
                 <div style={dropdownPanel}>
-                    <h3>Balance: {context.balance}</h3>
+                    <h3>Balance: {state.balance}</h3>
                     <div>
                         <input ref={fundInput} type="number" placeholder="0.00"/>
                         <button onClick={() => depositFunds(fundInput.current.value)}>Deposit Funds</button>

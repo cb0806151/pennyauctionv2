@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Wrapper from './Views/Wrapper';
+import { Store } from './Util/Store';
+import Stage from './Views/Stage';
 
 export function renderDOM(application) {
   ReactDOM.render(
@@ -10,4 +11,4 @@ export function renderDOM(application) {
   );
 }
 
-renderDOM(<Wrapper/>);
+renderDOM(<Store><Stage /></Store>);

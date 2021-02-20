@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
-import GlobalContext from '../Util/GlobalContext';
+import { CoreState } from '../Util/CoreState';
 
 function Test() {
-    const context = useContext(GlobalContext);
-
+    const dispatch = useContext(CoreState.Dispatch)
 
     return (
         <div>
             <h1>Test page</h1>
-            <button onClick={() => context.setCurrentPage('App')}>Go to App?</button>
+            <button onClick={() => dispatch({var: 'page', type: 'set', value: 'App'})}>Go to App?</button>
         </div>
     )
 }
