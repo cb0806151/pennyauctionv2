@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
 
-export default function Auctioneer() {
+export default function AuctionEnd() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
 
@@ -14,9 +14,9 @@ export default function Auctioneer() {
 
     return (
       <div style={container}>
-            <button onClick={() => dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})}>Copy invite link</button>
-            <h1>Current pot balance: {state.balance}</h1>
-            <h1>Open up a new browser window to join your auction</h1>
+            <h1>The auction has finished!</h1>
+            <h1>{state.lastBidAddress} won the pot worth {state.balance}</h1>
+            <button onClick={() => dispatch({var: 'page', type: 'set', value: 'Home'})}>Exit</button>
       </div>
     )
 }
