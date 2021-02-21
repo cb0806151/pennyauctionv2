@@ -16,7 +16,7 @@ export default function Home() {
         <div>
             <div style={panelContainer}>
                 <TabletButton onClickFunction={() => dispatch({var: 'page', type: 'set', value: 'StartAuction'})} message="Start Auction"/>
-                <TabletButton onClickFunction={() => dispatch({var: 'page', type: 'set', value: 'Test'})} message="Join Auction"/>
+                <TabletButton onClickFunction={() => dispatch({var: 'page', type: 'set', value: 'JoinAuction'})} message="Join Auction"/>
             </div>
         </div>
     )
