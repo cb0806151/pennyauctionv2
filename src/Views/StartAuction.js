@@ -13,6 +13,7 @@ export default function StartAuction() {
       inputRef: React.createRef(0),
       var: "deadline",
       type: "set",
+      validateInput: true,
       onClickFunction: dispatch,
     }
 
@@ -23,6 +24,7 @@ export default function StartAuction() {
       inputRef: React.createRef(0),
       var: "initialPotAmount",
       type: "set",
+      validateInput: true,
       onClickFunction: dispatch,
     }
 

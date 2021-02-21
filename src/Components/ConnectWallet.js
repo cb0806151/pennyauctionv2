@@ -1,11 +1,11 @@
 import * as stdlib from '@reach-sh/stdlib/ETH';
 import React, { useContext, useState } from 'react';
 import { CoreState } from '../Util/CoreState';
+import ValueSetter from '../Components/ValueSetter';
 
 export default function ConnectWallet() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
-    const fundInput = React.createRef(0);
 
     const [processing, setProcessing] = useState(false);
     const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -34,8 +34,8 @@ export default function ConnectWallet() {
     }
 
     const depositFunds = async (funds) => {
-        await stdlib.transfer(faucet, state.account, stdlib.parseCurrency(funds));
-        dispatch({var: 'balance', type: 'increment', value: funds})
+        await stdlib.transfer(faucet, state.account, stdlib.parseCurrency(funds.value));
+        dispatch(funds)
     }
 
     let dropdownPanel = {
@@ -43,6 +43,17 @@ export default function ConnectWallet() {
         position: 'absolute',
         transform: 'translate(-100%, 0)',
         padding: '10px',
+    }
+
+    const balanceSetterProps = {
+      inputType: "number",
+      inputMessage: "0.0",
+      buttonMessage: "Increase Balance",
+      inputRef: React.createRef(0),
+      var: "balance",
+      type: "increment",
+      validateInput: true,
+      onClickFunction: depositFunds,
     }
 
     return (
@@ -59,10 +70,7 @@ export default function ConnectWallet() {
                     ?
                 <div style={dropdownPanel}>
                     <h3>Balance: {state.balance}</h3>
-                    <div>
-                        <input ref={fundInput} type="number" placeholder="0.00"/>
-                        <button onClick={() => depositFunds(fundInput.current.value)}>Deposit Funds</button>
-                    </div>
+                    <ValueSetter {...balanceSetterProps} />
                 </div>
                     : null
             }
