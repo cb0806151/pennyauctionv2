@@ -32,7 +32,7 @@ export default function StartAuction() {
           <h1>Current Pot Amount: {state.initialPotAmount}</h1>
           <ValueSetter {...deadlineProps} />
           <ValueSetter {...potAmountProps} />
-          <button disabled={state.deadline === 0 || state.initialPotAmount === 0} onClick={() => dispatch({var: 'page', type: 'set', value: 'Test'})}>Start Auction</button>
+          <button disabled={state.deadline === 0 || state.initialPotAmount === 0} onClick={() => dispatch({var: 'page', type: 'set', value: 'Auctioneer'})}>Start Auction</button>
       </div>
     )
 }

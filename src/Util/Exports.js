@@ -3,6 +3,7 @@ import StartAuction from '../Views/StartAuction';
 import JoinAuction from '../Views/JoinAuction';
 import Home from '../Views/Home';
 import Better from '../Views/Better';
+import Auctioneer from '../Views/Auctioneer';
 
 
 const exports = {
@@ -11,6 +12,7 @@ const exports = {
     'JoinAuction': JoinAuction,
     'Home': Home,
     'Better': Better,
+    'Auctioneer': Auctioneer,
 };
 
 export default exports
