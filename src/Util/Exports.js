@@ -1,11 +1,11 @@
 import Test from '../Views/Test';
-import App from '../Views/App';
+import StartAuction from '../Views/StartAuction';
 import Home from '../Views/Home';
 
 
 const exports = {
     'Test': Test,
-    'App': App,
+    'StartAuction': StartAuction,
     'Home': Home,
 };
 

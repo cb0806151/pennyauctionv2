@@ -7,6 +7,7 @@ const reducer = (state, action) => {
     let update = {}
     switch (action.type) {
         case 'increment':
+            if (Number.isNaN(parseInt(action.value))) return state
             update[action.var] = parseInt(state[action.var]) + parseInt(action.value)
             return {
                 ...state,
@@ -28,6 +29,8 @@ const Provider = ({ children }) => {
         balance: 0, 
         page: 'Home',
         account: undefined,
+        deadline: 0,
+        initialPotAmount: 0,
     })
 
     return (

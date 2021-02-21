@@ -12,15 +12,11 @@ export default function Home() {
         alignItems: 'center',
     }
 
-    const navigateToPage = (pageName) => {
-        dispatch({var: 'page', type: 'set', value: pageName})
-    }
-
     return (
         <div>
             <div style={panelContainer}>
-                <TabletButton onClickFunction={() => navigateToPage('Test')} message="Start Auction"/>
-                <TabletButton onClickFunction={() => navigateToPage('App')} message="Join Auction"/>
+                <TabletButton onClickFunction={() => dispatch({var: 'page', type: 'set', value: 'StartAuction'})} message="Start Auction"/>
+                <TabletButton onClickFunction={() => dispatch({var: 'page', type: 'set', value: 'Test'})} message="Join Auction"/>
             </div>
         </div>
     )
