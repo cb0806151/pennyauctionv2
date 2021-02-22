@@ -12,8 +12,8 @@ export default function TabletButton(props) {
     }
 
     return (
-        <div style={tabletPanel}>
-            <h1 onClick={props.onClickFunction}>{props.message}</h1>
+        <div style={tabletPanel} onClick={props.onClickFunction}>
+            <h1>{props.message}</h1>
         </div>
     )
 }
