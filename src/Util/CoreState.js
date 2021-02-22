@@ -32,6 +32,7 @@ const Provider = ({ children }) => {
         deadline: 0,
         initialPotAmount: 0,
         lastBidAddress: "No one",
+        inviteLink: "",
     })
 
     return (
