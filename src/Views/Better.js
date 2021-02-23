@@ -7,11 +7,10 @@ import * as reach from '@reach-sh/stdlib/ETH';
 export default function Better() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
-    const yesButton = React.createRef();
-    const noButton = React.createRef();
+    const yesButton = React.useRef();
+    const noButton = React.useRef();
 
     React.useEffect(() => {
-        console.log(state.inviteLink)
         attach(state.inviteLink)
     }, [])
 
@@ -26,20 +25,19 @@ export default function Better() {
     
     const getBalance = async (who) => fmt(await reach.balanceOf(who));
 
-    const auctionEnds = async () => {
-        console.log("The auction has finished!");
+    const auctionEnds = async (winnerAddress) => {
+        dispatch({var: 'lastBidAddress', type: 'set', value: winnerAddress})
         dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})
     }
 
-    const placedBet = async (attendeeAddress, betAmount) => {
+    const placedBet = async (attendeeAddress, betAmount, potBalance) => {
+        dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         if ( reach.addressEq(attendeeAddress, state.account) ) {
             const balance = await getBalance(state.account);
-            console.log(`${attendeeAddress} bet: ${fmt(betAmount)} leaving their balance at ${balance}`);
         }
     }
 
     const mayBet = async (betAmount) => {
-        console.log("gonna bet?")
         const balance = await getBalance(state.account);
         const mayBet = balance > fmt(betAmount);
         if (mayBet === false) return mayBet;
@@ -59,7 +57,7 @@ export default function Better() {
     return (
       <div style={container}>
             <h1>{state.lastBidAddress} made the last bid</h1>
-            <h1>Current pot balance: {state.balance}</h1>
+            <h1>Current pot balance: {state.potAmount}</h1>
             <hr/>
             <h1>Make a bet?</h1>
             <div>

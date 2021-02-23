@@ -31,6 +31,7 @@ const Provider = ({ children }) => {
         account: undefined,
         deadline: 0,
         initialPotAmount: 0,
+        potAmount: 0,
         lastBidAddress: "No one",
         inviteLink: "",
     })

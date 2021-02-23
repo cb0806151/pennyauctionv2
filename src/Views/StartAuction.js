@@ -11,13 +11,18 @@ export default function StartAuction() {
     const deadlineInput = React.createRef();
     const potAmountInput = React.createRef();
 
-    const auctionEnds = async () => {
-      console.log("The auction has finished!");
+    const fmt = (x) => reach.formatCurrency(x, 4);
+
+    const updateBalance = (potBalance) => {
+      dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
+    }
+
+    const auctionEnds = (winnerAddress) => {
+      dispatch({var: 'lastBidAddress', type: 'set', value: winnerAddress})
       dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})
     }
 
     const getParams = () => {
-      console.log("getting params", deadline, potAmount);
       const params = {
         deadline: 3,
         potAmount: reach.parseCurrency(0.1),
@@ -27,9 +32,8 @@ export default function StartAuction() {
     }
     
     const deploy = async () => {
-        console.log("deploying")
         const ctc = state.account.deploy(backend);
-        backend.Auctioneer(ctc, {getParams, auctionEnds});
+        backend.Auctioneer(ctc, {getParams, auctionEnds, updateBalance});
         const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
         dispatch({var: 'inviteLink', type: 'set', value: ctcInfoStr});
     }

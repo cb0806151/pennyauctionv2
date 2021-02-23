@@ -1,7 +1,7 @@
 'reach 0.1';
 
 const Defaults = {
-    auctionEnds: Fun([], Null),
+    auctionEnds: Fun([Address], Null),
 };
 const Auc = {
     ...Defaults,
@@ -10,10 +10,11 @@ const Auc = {
         potAmount: UInt,
         potAddress: Address,
     })), 
+    updateBalance: Fun([UInt], Null),
 };
 const Bet = {
     ...Defaults,
-    placedBet: Fun([Address, UInt], Null),
+    placedBet: Fun([Address, UInt, UInt], Null),
     mayBet: Fun([UInt], Bool),
 };
 
@@ -25,9 +26,9 @@ export const main =
             ['class', 'Better', Bet]
         ],
         (Auctioneer, Better) => {
-            const auctionEnds = () => {
+            const auctionEnds = (winnerAddress) => {
                 each([Auctioneer, Better], () => {
-                    interact.auctionEnds();
+                    interact.auctionEnds(winnerAddress);
                 });
             };
 
@@ -53,7 +54,8 @@ export const main =
                     (() => {
                         const address = this;
                         const betValue = getBet(currentPot);
-                        Better.only(() => interact.placedBet(address, betValue));
+                        Better.only(() => interact.placedBet(address, betValue, currentPot + betValue));
+                        Auctioneer.only(() => interact.updateBalance(currentPot + betValue));
                         return [ currentPot + betValue, true, address ];
                     }))
                 .timeout(3, () => {
@@ -62,7 +64,7 @@ export const main =
                     });
                         
             transfer(balance()).to(winnerAddress);
-            auctionEnds();
+            auctionEnds(winnerAddress);
             commit();
         }
     );

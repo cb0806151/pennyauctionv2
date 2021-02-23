@@ -15,7 +15,7 @@ export default function AuctionEnd() {
     return (
       <div style={container}>
             <h1>The auction has finished!</h1>
-            <h1>{state.lastBidAddress} won the pot worth {state.balance}</h1>
+            <h1>{state.lastBidAddress} won the pot worth {state.potAmount}</h1>
             <button onClick={() => dispatch({var: 'page', type: 'set', value: 'Home'})}>Exit</button>
       </div>
     )
