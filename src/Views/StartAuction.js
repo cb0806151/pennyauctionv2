@@ -32,6 +32,7 @@ export default function StartAuction() {
 
     const auctionEnds = async () => {
       console.log("The auction has finished!");
+      dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})
     }
 
     const getParams = () => {
