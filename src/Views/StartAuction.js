@@ -1,34 +1,15 @@
 import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
-import ValueSetter from '../Components/ValueSetter';
 import * as backend from '../build/index.main.mjs';
 import * as reach from '@reach-sh/stdlib/ETH';
 
 export default function StartAuction() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
-
-    const deadlineProps = {
-      inputType: "number",
-      inputMessage: "0",
-      buttonMessage: "Set Deadline",
-      inputRef: React.createRef(0),
-      var: "deadline",
-      type: "set",
-      validateInput: true,
-      onClickFunction: dispatch,
-    }
-
-    const potAmountProps = {
-      inputType: "number",
-      inputMessage: "0.0",
-      buttonMessage: "Set Initial Pot Amount",
-      inputRef: React.createRef(0),
-      var: "initialPotAmount",
-      type: "set",
-      validateInput: true,
-      onClickFunction: dispatch,
-    }
+    const [deadline, setDeadline] = React.useState(0);
+    const [potAmount, setPotAmount] = React.useState(0);
+    const deadlineInput = React.createRef();
+    const potAmountInput = React.createRef();
 
     const auctionEnds = async () => {
       console.log("The auction has finished!");
@@ -36,7 +17,7 @@ export default function StartAuction() {
     }
 
     const getParams = () => {
-      console.log("getting params");
+      console.log("getting params", deadline, potAmount);
       const params = {
         deadline: 3,
         potAmount: reach.parseCurrency(0.1),
@@ -62,9 +43,9 @@ export default function StartAuction() {
       <div>
           <h1>Current Deadline: {state.deadline}</h1>
           <h1>Current Pot Amount: {state.initialPotAmount}</h1>
-          <ValueSetter {...deadlineProps} />
-          <ValueSetter {...potAmountProps} />
-          <button disabled={state.deadline === 0 || state.initialPotAmount === 0} onClick={() => startAuction()}>Start Auction</button>
+          <input ref={deadlineInput} onChange={() => setDeadline(deadlineInput.current.value)} type="number" placeholder="0"/>
+          <input ref={potAmountInput} onChange={() => setPotAmount(potAmountInput.current.value)} type="number" placeholder="0.0"/>
+          <button disabled={deadline === 0 || potAmount === 0} onClick={() => startAuction()}>Start Auction</button>
       </div>
     )
 }

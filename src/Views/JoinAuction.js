@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
-import * as backend from '../build/index.main.mjs';
 
 
 export default function JoinAuction() {
-    const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
     const inviteTextArea = React.createRef();
 
@@ -24,18 +22,8 @@ export default function JoinAuction() {
         height: '200px',
     }
 
-    const auctionEnds = async () => {
-        console.log("The auction has finished!");
-        dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})
-    }
-
-    const attach = (ctcInfoStr) => {
-        const ctc = state.account.attach(backend, JSON.parse(ctcInfoStr));
-        backend.Better(ctc, {auctionEnds});
-    }
-
     const goToBettingPage = () => {
-        attach(inviteTextArea.current.value)
+        dispatch({var: 'inviteLink', type: 'set', value: inviteTextArea.current.value});
         dispatch({var: 'page', type: 'set', value: 'Better'})
     }
 
