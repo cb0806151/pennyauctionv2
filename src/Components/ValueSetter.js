@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function ValueSetter(props) {
-    const [value, setValue] = React.useState(undefined)
+    const [value, setValue] = useState(undefined)
 
     const validateInput = (value) => {
         if (Number.isNaN(parseInt(value))) return 0;

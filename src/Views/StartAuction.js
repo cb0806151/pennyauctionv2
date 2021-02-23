@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, createRef } from 'react';
 import { CoreState } from '../Util/CoreState';
 import * as backend from '../build/index.main.mjs';
 import * as reach from '@reach-sh/stdlib/ETH';
@@ -6,10 +6,10 @@ import * as reach from '@reach-sh/stdlib/ETH';
 export default function StartAuction() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
-    const [deadline, setDeadline] = React.useState(0);
-    const [potAmount, setPotAmount] = React.useState(0);
-    const deadlineInput = React.createRef();
-    const potAmountInput = React.createRef();
+    const [deadline, setDeadline] = useState(0);
+    const [potAmount, setPotAmount] = useState(0);
+    const deadlineInput = createRef();
+    const potAmountInput = createRef();
 
     const fmt = (x) => reach.formatCurrency(x, 4);
 

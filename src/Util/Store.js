@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import { CoreState } from './CoreState'
 
 const providers = [<CoreState.Provider />]
 
 const Store = ({ children: initial }) =>
     providers.reduce(
-        (children, parent) => React.cloneElement(parent, { children }),
+        (children, parent) => cloneElement(parent, { children }),
         initial
     )
 

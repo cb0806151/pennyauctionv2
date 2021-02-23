@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { createContext, useReducer } from 'react';
 
-const State = React.createContext();
-const Dispatch = React.createContext();
+const State = createContext();
+const Dispatch = createContext();
 
 const reducer = (state, action) => {
     let update = {}
@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 }
 
 const Provider = ({ children }) => {
-    const [state, dispatch] = React.useReducer(reducer, { 
+    const [state, dispatch] = useReducer(reducer, { 
         currencyAbbreviation: "ETH",
         balance: 0, 
         page: 'Home',

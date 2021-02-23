@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { CoreState } from '../Util/CoreState';
 import * as backend from '../build/index.main.mjs';
 import * as reach from '@reach-sh/stdlib/ETH';
@@ -8,10 +8,10 @@ import { getAddressWording } from '../Util/UtilityFunctions';
 export default function Better() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
-    const yesButton = React.useRef();
-    const noButton = React.useRef();
+    const yesButton = useRef();
+    const noButton = useRef();
 
-    React.useEffect(() => {
+    useEffect(() => {
         attach(state.inviteLink)
     }, [])
 

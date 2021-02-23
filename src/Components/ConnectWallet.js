@@ -1,5 +1,5 @@
 import * as stdlib from '@reach-sh/stdlib/ETH';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, createRef } from 'react';
 import { CoreState } from '../Util/CoreState';
 import ValueSetter from '../Components/ValueSetter';
 
@@ -49,7 +49,7 @@ export default function ConnectWallet() {
       inputType: "number",
       inputMessage: "0.0",
       buttonMessage: "Increase Balance",
-      inputRef: React.createRef(0),
+      inputRef: createRef(0),
       var: "balance",
       type: "increment",
       validateInput: true,

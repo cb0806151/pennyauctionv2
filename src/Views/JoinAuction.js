@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, createRef } from 'react';
 import { CoreState } from '../Util/CoreState';
 
 
 export default function JoinAuction() {
     const dispatch = useContext(CoreState.Dispatch)
-    const inviteTextArea = React.createRef();
+    const inviteTextArea = createRef();
 
     const inviteInput = {
         width: '50%',
