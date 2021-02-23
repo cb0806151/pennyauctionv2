@@ -31,6 +31,7 @@ export default function Better() {
     }
 
     const placedBet = async (attendeeAddress, betAmount, potBalance) => {
+        dispatch({var: 'lastBidAddress', type: 'set', value: attendeeAddress})
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         if ( reach.addressEq(attendeeAddress, state.account) ) {
             const balance = await getBalance(state.account);
@@ -38,6 +39,7 @@ export default function Better() {
     }
 
     const mayBet = async (betAmount) => {
+        dispatch({var: 'mayBet', type: 'set', value: true})
         const balance = await getBalance(state.account);
         const mayBet = balance > fmt(betAmount);
         if (mayBet === false) return mayBet;
@@ -45,6 +47,7 @@ export default function Better() {
             yesButton.current.addEventListener('click', (e) => resolve(true), {'once': true})
             noButton.current.addEventListener('click', (e) => resolve(false), {'once': true})
         });
+        dispatch({var: 'mayBet', type: 'set', value: false})
         return betStatus;
     }
 
@@ -59,10 +62,12 @@ export default function Better() {
             <h1>{state.lastBidAddress} made the last bid</h1>
             <h1>Current pot balance: {state.potAmount}</h1>
             <hr/>
-            <h1>Make a bet?</h1>
-            <div>
-                <button ref={yesButton}>Yes</button>
-                <button ref={noButton}>No</button>
+            <div style={state.mayBet ? null : {display: 'none'}}>
+                <h1>Make a bet?</h1>
+                <div>
+                    <button ref={yesButton}>Yes</button>
+                    <button ref={noButton}>No</button>
+                </div>
             </div>
       </div>
     )

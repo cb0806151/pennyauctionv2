@@ -34,6 +34,7 @@ const Provider = ({ children }) => {
         potAmount: 0,
         lastBidAddress: "No one",
         inviteLink: "",
+        mayBet: false
     })
 
     return (
