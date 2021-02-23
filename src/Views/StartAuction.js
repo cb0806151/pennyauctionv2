@@ -51,7 +51,7 @@ export default function StartAuction() {
             <input ref={deadlineInput} onChange={() => setDeadline(deadlineInput.current.value)} type="number" placeholder="0"/>
           </div>
           <div>
-            <h3>Current Pot Amount: </h3>
+            <h3>Current Pot Amount (in {state.currencyAbbreviation}): </h3>
             <input ref={potAmountInput} onChange={() => setPotAmount(potAmountInput.current.value)} type="number" placeholder="0.0"/>
           </div>
           <button disabled={deadline === 0 || potAmount === 0} onClick={() => startAuction()}>Start Auction</button>

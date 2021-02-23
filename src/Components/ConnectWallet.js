@@ -69,7 +69,7 @@ export default function ConnectWallet() {
                 dropdownVisible
                     ?
                 <div style={dropdownPanel}>
-                    <h3>Balance: {state.balance}</h3>
+                    <h3>Balance (in {state.currencyAbbreviation}): {state.balance}</h3>
                     <ValueSetter {...balanceSetterProps} />
                 </div>
                     : null

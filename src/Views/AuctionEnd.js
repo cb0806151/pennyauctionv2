@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
+import { getAddressWording } from '../Util/UtilityFunctions';
 
 export default function AuctionEnd() {
     const state = useContext(CoreState.State)
@@ -15,7 +16,7 @@ export default function AuctionEnd() {
     return (
       <div style={container}>
             <h1>The auction has finished!</h1>
-            <h1>{state.lastBidAddress === state.account.networkAccount.address ? "You" : state.lastBidAddress} won the pot worth {state.potAmount}!</h1>
+    <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} won the pot worth {state.potAmount} {state.currencyAbbreviation}!</h1>
             <button onClick={() => dispatch({var: 'page', type: 'set', value: 'Home'})}>Exit</button>
       </div>
     )

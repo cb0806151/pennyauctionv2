@@ -4,7 +4,6 @@ const State = React.createContext();
 const Dispatch = React.createContext();
 
 const reducer = (state, action) => {
-    console.log(action)
     let update = {}
     switch (action.type) {
         case 'increment':
@@ -27,13 +26,15 @@ const reducer = (state, action) => {
 
 const Provider = ({ children }) => {
     const [state, dispatch] = React.useReducer(reducer, { 
+        currencyAbbreviation: "ETH",
         balance: 0, 
         page: 'Home',
         account: undefined,
         potAmount: 0,
         lastBidAddress: "",
         inviteLink: "",
-        mayBet: false
+        mayBet: false,
+        betAmount: 0,
     })
 
     return (

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
 import * as backend from '../build/index.main.mjs';
 import * as reach from '@reach-sh/stdlib/ETH';
+import { getAddressWording } from '../Util/UtilityFunctions';
 
 
 export default function Better() {
@@ -39,10 +40,12 @@ export default function Better() {
     }
 
     const mayBet = async (betAmount, potBalance) => {
+        const translatedBetAmount = fmt(betAmount);
+        dispatch({var: 'betAmount', type: 'set', value: translatedBetAmount})
         dispatch({var: 'mayBet', type: 'set', value: true})
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         const balance = await getBalance(state.account);
-        const mayBet = balance > fmt(betAmount);
+        const mayBet = balance > translatedBetAmount;
         if (mayBet === false) return mayBet;
         const betStatus = await new Promise(resolve => {
             yesButton.current.addEventListener('click', (e) => resolve(true), {'once': true})
@@ -60,11 +63,11 @@ export default function Better() {
 
     return (
       <div style={container}>
-            <h1>{state.lastBidAddress} made the last bid</h1>
-            <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount}</h1>
+            <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} made the last bid</h1>
+            <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}</h1>
             <hr/>
             <div style={state.mayBet ? null : {display: 'none'}}>
-                <h1>Make a bet?</h1>
+                <h1>Make a bet of {state.betAmount} {state.currencyAbbreviation}?</h1>
                 <div>
                     <button ref={yesButton}>Yes</button>
                     <button ref={noButton}>No</button>
