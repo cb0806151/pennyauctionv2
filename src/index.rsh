@@ -14,8 +14,8 @@ const Auc = {
 };
 const Bet = {
     ...Defaults,
-    placedBet: Fun([Address, UInt, UInt], Null),
-    mayBet: Fun([UInt], Bool),
+    placedBet: Fun([Address, UInt], Null),
+    mayBet: Fun([UInt, UInt], Bool),
 };
 
 export const main =
@@ -48,13 +48,13 @@ export const main =
                 .invariant(balance() == currentPot)
                 .while(auctionRunning)
                 .case(Better, (() => ({
-                        when: declassify(interact.mayBet(getBet(currentPot))),
+                        when: declassify(interact.mayBet(getBet(currentPot), currentPot)),
                     })),
                     (() => getBet(currentPot)),
                     (() => {
                         const address = this;
                         const betValue = getBet(currentPot);
-                        Better.only(() => interact.placedBet(address, betValue, currentPot + betValue));
+                        Better.only(() => interact.placedBet(address, currentPot + betValue));
                         Auctioneer.only(() => interact.updateBalance(currentPot + betValue));
                         return [ currentPot + betValue, true, address ];
                     }))

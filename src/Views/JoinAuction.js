@@ -21,9 +21,11 @@ export default function JoinAuction() {
         alignItems: 'center',
         height: '200px',
     }
-
-    const goToBettingPage = () => {
-        dispatch({var: 'inviteLink', type: 'set', value: inviteTextArea.current.value});
+    
+    const goToBettingPage = async () => {
+        let inviteLink = inviteTextArea.current.value;
+        dispatch({var: 'lastBidAddress', type: 'set', value: JSON.parse(inviteLink).creator});
+        dispatch({var: 'inviteLink', type: 'set', value: inviteLink});
         dispatch({var: 'page', type: 'set', value: 'Better'})
     }
 

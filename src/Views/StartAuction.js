@@ -24,8 +24,8 @@ export default function StartAuction() {
 
     const getParams = () => {
       const params = {
-        deadline: 3,
-        potAmount: reach.parseCurrency(0.1),
+        deadline: deadline,
+        potAmount: reach.parseCurrency(potAmount),
         potAddress: state.account,
       }
       return params;
@@ -40,15 +40,20 @@ export default function StartAuction() {
 
     const startAuction = async () => {
       await deploy()
+      dispatch({var: 'potAmount', type: 'set', value: potAmount})
       dispatch({var: 'page', type: 'set', value: 'Auctioneer'})
     }
 
     return (
       <div>
-          <h1>Current Deadline: {state.deadline}</h1>
-          <h1>Current Pot Amount: {state.initialPotAmount}</h1>
-          <input ref={deadlineInput} onChange={() => setDeadline(deadlineInput.current.value)} type="number" placeholder="0"/>
-          <input ref={potAmountInput} onChange={() => setPotAmount(potAmountInput.current.value)} type="number" placeholder="0.0"/>
+          <div>
+            <h3>Current Deadline: </h3>
+            <input ref={deadlineInput} onChange={() => setDeadline(deadlineInput.current.value)} type="number" placeholder="0"/>
+          </div>
+          <div>
+            <h3>Current Pot Amount: </h3>
+            <input ref={potAmountInput} onChange={() => setPotAmount(potAmountInput.current.value)} type="number" placeholder="0.0"/>
+          </div>
           <button disabled={deadline === 0 || potAmount === 0} onClick={() => startAuction()}>Start Auction</button>
       </div>
     )

@@ -4,6 +4,7 @@ const State = React.createContext();
 const Dispatch = React.createContext();
 
 const reducer = (state, action) => {
+    console.log(action)
     let update = {}
     switch (action.type) {
         case 'increment':
@@ -29,10 +30,8 @@ const Provider = ({ children }) => {
         balance: 0, 
         page: 'Home',
         account: undefined,
-        deadline: 0,
-        initialPotAmount: 0,
         potAmount: 0,
-        lastBidAddress: "No one",
+        lastBidAddress: "",
         inviteLink: "",
         mayBet: false
     })

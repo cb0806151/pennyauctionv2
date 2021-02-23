@@ -30,7 +30,7 @@ export default function Better() {
         dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})
     }
 
-    const placedBet = async (attendeeAddress, betAmount, potBalance) => {
+    const placedBet = async (attendeeAddress, potBalance) => {
         dispatch({var: 'lastBidAddress', type: 'set', value: attendeeAddress})
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         if ( reach.addressEq(attendeeAddress, state.account) ) {
@@ -38,8 +38,9 @@ export default function Better() {
         }
     }
 
-    const mayBet = async (betAmount) => {
+    const mayBet = async (betAmount, potBalance) => {
         dispatch({var: 'mayBet', type: 'set', value: true})
+        dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         const balance = await getBalance(state.account);
         const mayBet = balance > fmt(betAmount);
         if (mayBet === false) return mayBet;
@@ -60,7 +61,7 @@ export default function Better() {
     return (
       <div style={container}>
             <h1>{state.lastBidAddress} made the last bid</h1>
-            <h1>Current pot balance: {state.potAmount}</h1>
+            <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount}</h1>
             <hr/>
             <div style={state.mayBet ? null : {display: 'none'}}>
                 <h1>Make a bet?</h1>
