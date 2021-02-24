@@ -66,13 +66,19 @@ export default function Better() {
             <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} made the last bid</h1>
             <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}</h1>
             <hr/>
-            <div style={state.mayBet ? null : {display: 'none'}}>
-                <h1>Make a bet of {state.betAmount} {state.currencyAbbreviation}?</h1>
+            {state.mayBet ? 
                 <div>
-                    <button ref={yesButton}>Yes</button>
-                    <button ref={noButton}>No</button>
+                    <h1>Make a bet of {state.betAmount} {state.currencyAbbreviation}?</h1>
+                    <div>
+                        <button ref={yesButton}>Yes</button>
+                        <button ref={noButton}>No</button>
+                    </div>
                 </div>
-            </div>
+            :
+                <div>
+                    <h1>...Waiting for next betting cycle to start...</h1>
+                </div>
+            }            
       </div>
     )
 }
