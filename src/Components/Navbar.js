@@ -2,6 +2,9 @@ import React from 'react';
 import ConnectWallet from './ConnectWallet';
 import Explanation from './Explanation';
 import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 export default function Navbar() {
     const [open, setOpen] = React.useState(false);
@@ -14,27 +17,17 @@ export default function Navbar() {
         setOpen(false);
     };
 
-    var titleSpace = {
-        color: 'white',
-        flexGrow: 1,
-        textAlign: 'left',
-    };
-
-    var navbar = {
-        background: 'black',
-        width: '100%',
-        height: '10vh',
-        display: 'flex',
-        alignItems: 'center',
-    }
-
     return (
-        <div style={navbar}>
-            <div style={titleSpace}>
-                <h1>The Reach Penny Auction</h1>
-                <Button variant="outlined" color="primary" onClick={handleClickOpen}>What's a Penny Auction?</Button>
-            </div>
-            <ConnectWallet />
+        <div>
+            <AppBar position="static">
+                <Toolbar>
+                <Typography variant="h6" style={{flexGrow: 1}}>
+                    The Reach Penny Auction
+                </Typography>
+                <Button variant="outlined" color="inherit" onClick={handleClickOpen}>What's a Penny Auction?</Button>
+                <ConnectWallet />
+                </Toolbar>
+            </AppBar>
             <Explanation open={open} handleClose={() => handleClose()}></Explanation>
             
         </div>
