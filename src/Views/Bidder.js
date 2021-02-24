@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useEffect } from 'react';
+import Popup from '../Components/Popup';
 import { CoreState } from '../Util/CoreState';
 import * as backend from '../build/index.main.mjs';
 import * as reach from '@reach-sh/stdlib/ETH';
@@ -10,6 +11,16 @@ export default function Bidder() {
     const dispatch = useContext(CoreState.Dispatch)
     const yesButton = useRef();
     const noButton = useRef();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
+
+    const popupProps = {
+        open: open,
+        handleClose: () => handleClose(),
+        message: "Somone bid before you could",
+    }
 
     useEffect(() => {
         attach(state.inviteLink)
@@ -36,6 +47,8 @@ export default function Bidder() {
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         if ( reach.addressEq(attendeeAddress, state.account) ) {
             const balance = await getBalance(state.account);
+        } else {
+            handleOpen() 
         }
     }
 
@@ -78,7 +91,8 @@ export default function Bidder() {
                 <div>
                     <h1>...Waiting for next bidding cycle to start...</h1>
                 </div>
-            }            
+            }     
+            <Popup {...popupProps}/>       
       </div>
     )
 }
