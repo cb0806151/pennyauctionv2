@@ -5,7 +5,7 @@ import * as reach from '@reach-sh/stdlib/ETH';
 import { getAddressWording } from '../Util/UtilityFunctions';
 
 
-export default function Better() {
+export default function Bidder() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
     const yesButton = useRef();
@@ -31,7 +31,7 @@ export default function Better() {
         dispatch({var: 'page', type: 'set', value: 'AuctionEnd'})
     }
 
-    const placedBet = async (attendeeAddress, potBalance) => {
+    const placedBid = async (attendeeAddress, potBalance) => {
         dispatch({var: 'lastBidAddress', type: 'set', value: attendeeAddress})
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         if ( reach.addressEq(attendeeAddress, state.account) ) {
@@ -39,26 +39,26 @@ export default function Better() {
         }
     }
 
-    const mayBet = async (betAmount, potBalance) => {
-        const translatedBetAmount = fmt(betAmount);
-        dispatch({var: 'betAmount', type: 'set', value: translatedBetAmount})
-        dispatch({var: 'mayBet', type: 'set', value: true})
+    const mayBid = async (bidAmount, potBalance) => {
+        const translatedBidAmount = fmt(bidAmount);
+        dispatch({var: 'bidAmount', type: 'set', value: translatedBidAmount})
+        dispatch({var: 'mayBid', type: 'set', value: true})
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         const balance = await getBalance(state.account);
-        const mayBet = balance > translatedBetAmount;
-        if (mayBet === false) return mayBet;
-        const betStatus = await new Promise(resolve => {
+        const mayBid = balance > translatedBidAmount;
+        if (mayBid === false) return mayBid;
+        const bidStatus = await new Promise(resolve => {
             yesButton.current.addEventListener('click', (e) => resolve(true), {'once': true})
             noButton.current.addEventListener('click', (e) => resolve(false), {'once': true})
         });
-        dispatch({var: 'mayBet', type: 'set', value: false})
-        return betStatus;
+        dispatch({var: 'mayBid', type: 'set', value: false})
+        return bidStatus;
     }
 
 
     const attach = (ctcInfoStr) => {
         const ctc = state.account.attach(backend, JSON.parse(ctcInfoStr));
-        backend.Better(ctc, {auctionEnds, mayBet, placedBet});
+        backend.Bidder(ctc, {auctionEnds, mayBid, placedBid});
     }
 
     return (
@@ -66,9 +66,9 @@ export default function Better() {
             <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} made the last bid</h1>
             <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}</h1>
             <hr/>
-            {state.mayBet ? 
+            {state.mayBid ? 
                 <div>
-                    <h1>Make a bet of {state.betAmount} {state.currencyAbbreviation}?</h1>
+                    <h1>Make a bid of {state.bidAmount} {state.currencyAbbreviation}?</h1>
                     <div>
                         <button ref={yesButton}>Yes</button>
                         <button ref={noButton}>No</button>
@@ -76,7 +76,7 @@ export default function Better() {
                 </div>
             :
                 <div>
-                    <h1>...Waiting for next betting cycle to start...</h1>
+                    <h1>...Waiting for next bidding cycle to start...</h1>
                 </div>
             }            
       </div>

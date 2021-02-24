@@ -12,10 +12,10 @@ const Auc = {
     })), 
     updateBalance: Fun([UInt], Null),
 };
-const Bet = {
+const Bid = {
     ...Defaults,
-    placedBet: Fun([Address, UInt], Null),
-    mayBet: Fun([UInt, UInt], Bool),
+    placedBid: Fun([Address, UInt], Null),
+    mayBid: Fun([UInt, UInt], Bool),
 };
 
 export const main =
@@ -23,16 +23,16 @@ export const main =
         {},
         [
             ['Auctioneer', Auc], 
-            ['class', 'Better', Bet]
+            ['class', 'Bidder', Bid]
         ],
-        (Auctioneer, Better) => {
+        (Auctioneer, Bidder) => {
             const auctionEnds = (winnerAddress) => {
-                each([Auctioneer, Better], () => {
+                each([Auctioneer, Bidder], () => {
                     interact.auctionEnds(winnerAddress);
                 });
             };
 
-            const getBet = (potBalance) => {
+            const getBid = (potBalance) => {
                 return potBalance / 100;
             };
 
@@ -47,16 +47,16 @@ export const main =
                 parallel_reduce([ potAmount, true, potAddress ])
                 .invariant(balance() == currentPot)
                 .while(auctionRunning)
-                .case(Better, (() => ({
-                        when: declassify(interact.mayBet(getBet(currentPot), currentPot)),
+                .case(Bidder, (() => ({
+                        when: declassify(interact.mayBid(getBid(currentPot), currentPot)),
                     })),
-                    (() => getBet(currentPot)),
+                    (() => getBid(currentPot)),
                     (() => {
                         const address = this;
-                        const betValue = getBet(currentPot);
-                        Better.only(() => interact.placedBet(address, currentPot + betValue));
-                        Auctioneer.only(() => interact.updateBalance(currentPot + betValue));
-                        return [ currentPot + betValue, true, address ];
+                        const bidValue = getBid(currentPot);
+                        Bidder.only(() => interact.placedBid(address, currentPot + bidValue));
+                        Auctioneer.only(() => interact.updateBalance(currentPot + bidValue));
+                        return [ currentPot + bidValue, true, address ];
                     }))
                 .timeout(3, () => {
                     Auctioneer.publish();

@@ -22,18 +22,18 @@ export default function JoinAuction() {
         height: '200px',
     }
     
-    const goToBettingPage = async () => {
+    const goToBiddingPage = async () => {
         let inviteLink = inviteTextArea.current.value;
         dispatch({var: 'lastBidAddress', type: 'set', value: JSON.parse(inviteLink).creator});
         dispatch({var: 'inviteLink', type: 'set', value: inviteLink});
-        dispatch({var: 'page', type: 'set', value: 'Better'})
+        dispatch({var: 'page', type: 'set', value: 'Bidder'})
     }
 
     return (
       <div style={container}>
           <div style={inviteInput}>
               <textarea ref={inviteTextArea} style={{width: '50%', height: '50%'}}></textarea>
-              <button onClick={() => goToBettingPage()}>Submit Invite</button>
+              <button onClick={() => goToBiddingPage()}>Submit Invite</button>
           </div>
       </div>
     )
