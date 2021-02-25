@@ -1,15 +1,26 @@
 import * as stdlib from '@reach-sh/stdlib/ETH';
-import React, { useContext, useState, createRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { CoreState } from '../Util/CoreState';
-import ValueSetter from '../Components/ValueSetter';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
 
 export default function ConnectWallet() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
 
     const [processing, setProcessing] = useState(false);
-    const [dropdownVisible, setDropdownVisible] = useState(false);
     const [faucet, setFaucet] = useState(undefined);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [amount, setAmount] = useState();
+
+    const updateAmount = (event) => setAmount(event.target.value);
+
+    const closeDropdown = () => setAnchorEl(null);
     
     const connectWallet = async () => {
         setProcessing(true);
@@ -24,57 +35,71 @@ export default function ConnectWallet() {
         dispatch({var: 'balance', type: 'set', value: balance})
     }
 
-    const toggleDropdown = async () => {
-        setDropdownVisible(dropdownVisible ? false : true);
+    const openDropdown = async (event) => {
+        setAnchorEl(event.currentTarget);
         try {
             setFaucet(await stdlib.getFaucet());
         } catch {
-            setDropdownVisible(dropdownVisible ? false : true);
+            setAnchorEl(null);        
         }
     }
 
-    const depositFunds = async (funds) => {
-        await stdlib.transfer(faucet, state.account, stdlib.parseCurrency(funds.value));
-        dispatch(funds)
+    const validateInput = (value) => {
+        if (Number.isNaN(parseInt(value))) return 0;
+        if (value < 0) return 0;
+        return value;
     }
 
-    let dropdownPanel = {
-        background: 'gray',
-        position: 'absolute',
-        transform: 'translate(-100%, 0)',
-        padding: '10px',
-    }
-
-    const balanceSetterProps = {
-      inputType: "number",
-      inputMessage: "0.0",
-      buttonMessage: "Increase Balance",
-      inputRef: createRef(0),
-      var: "balance",
-      type: "increment",
-      validateInput: true,
-      onClickFunction: depositFunds,
+    const depositFunds = async () => {
+        let funds = amount;
+        funds = validateInput(funds)
+        await stdlib.transfer(faucet, state.account, stdlib.parseCurrency(funds));
+        dispatch({var: 'balance', type: 'increment', value: funds})
     }
 
     return (
         <div>
             {
-                (state.account === undefined) 
-                    ? 
-                <button disabled={processing} onClick={() => connectWallet()}>Connect Wallet</button>
-                    :
-                <button onClick={() => toggleDropdown()}>Fund Wallet</button>
+            (state.account === undefined) ?
+            <Button disabled={processing} 
+                    aria-controls="simple-menu" 
+                    aria-haspopup="true" 
+                    variant="outlined" 
+                    color="inherit" 
+                    onClick={connectWallet}>Connect Wallet</Button>
+            :
+            <Button aria-controls="simple-menu" 
+                    aria-haspopup="true" 
+                    variant="outlined" 
+                    color="inherit" 
+                    onClick={openDropdown}>Fund Wallet</Button>
             }
-            {
-                dropdownVisible
-                    ?
-                <div style={dropdownPanel}>
-                    <h3>Balance (in {state.currencyAbbreviation}): {state.balance}</h3>
-                    <ValueSetter {...balanceSetterProps} />
-                </div>
-                    : null
-            }
-            
+
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={closeDropdown}
+            >
+                <MenuItem disabled>Balance (in {state.currencyAbbreviation}): {state.balance}</MenuItem>
+                <MenuItem>
+                    <FormControl variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">Amount</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={'text'}
+                            onChange={updateAmount}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <Button onClick={async () => depositFunds()}>Add</Button>
+                            </InputAdornment>
+                            }
+                            labelWidth={70}
+                        />
+                    </FormControl>
+                </MenuItem>
+            </Menu>
         </div>
     )
 }
