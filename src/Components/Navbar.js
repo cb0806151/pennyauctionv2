@@ -24,7 +24,7 @@ export default function Navbar() {
                 <Typography variant="h6" style={{flexGrow: 1}}>
                     The Reach Penny Auction
                 </Typography>
-                <Button variant="outlined" color="inherit" onClick={handleClickOpen}>What's a Penny Auction?</Button>
+                <Button variant="outlined" color="inherit" onClick={handleClickOpen} style={{marginRight: '20px'}}>What's a Penny Auction?</Button>
                 <ConnectWallet />
                 </Toolbar>
             </AppBar>

@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
 import Exports from '../Util/Exports';
 import Navbar from '../Components/Navbar';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+
 
 
 export default function Stage() {
@@ -13,11 +16,11 @@ export default function Stage() {
     }
 
     return (
-        <div>
+        <Box>
             <Navbar />
-            <header>
+            <Container>
                 {renderPage(state.page, Exports)}
-            </header>
-        </div>
+            </Container>
+        </Box>
     )
 }
