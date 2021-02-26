@@ -81,11 +81,11 @@ export default function Bidder() {
                     <Button variant="contained" style={{marginRight: '10px'}}>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} </Button>
                     made the last bid
                 </Typography>
-                <Divider style={{width: '50%'}}/>
+                <Divider style={{width: '50%', margin: '10px'}}/>
                 <Typography gutterBottom variant="h5" component="h5">
                     Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}
                 </Typography>
-                <Divider style={{width: '50%'}}/>
+                <Divider style={{width: '50%', margin: '10px'}}/>
                 {state.mayBid ? 
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
                         <Typography gutterBottom variant="h5" component="h5">
