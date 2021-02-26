@@ -1,23 +1,27 @@
 import React, { useContext } from 'react';
 import { CoreState } from '../Util/CoreState';
 import { getAddressWording } from '../Util/UtilityFunctions';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 export default function AuctionEnd() {
     const state = useContext(CoreState.State)
     const dispatch = useContext(CoreState.Dispatch)
 
-    const container = {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        height: '200px',
-    }
-
     return (
-      <div style={container}>
-            <h1>The auction has finished!</h1>
-    <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} won the pot worth {state.potAmount} {state.currencyAbbreviation}!</h1>
-            <button onClick={() => dispatch({var: 'page', type: 'set', value: 'Home'})}>Exit</button>
-      </div>
+      <Card style={{width: '100%', height: '100%'}}>
+        <CardContent style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+          <Typography gutterBottom variant="h5" component="h2">The auction has finished!</Typography>
+          <Divider style={{width: '50%', margin: '10px'}}/>
+          <Typography gutterBottom variant="h5" component="h3">
+            <Button variant="contained" style={{marginRight: '10px'}}>{getAddressWording(state.lastBidAddress, state.account?.networkAccount?.address)}</Button> 
+            won the pot worth {state.potAmount} {state.currencyAbbreviation}!
+          </Typography>
+          <Button variant="outlined" color="inherit" onClick={() => dispatch({var: 'page', type: 'set', value: 'Home'})}>Exit</Button>
+        </CardContent>
+      </Card>
     )
 }
