@@ -1,9 +1,15 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import Popup from '../Components/Popup';
 import { CoreState } from '../Util/CoreState';
 import * as backend from '../build/index.main.mjs';
 import * as reach from '@reach-sh/stdlib/ETH';
 import { getAddressWording } from '../Util/UtilityFunctions';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
 export default function Bidder() {
@@ -11,7 +17,7 @@ export default function Bidder() {
     const dispatch = useContext(CoreState.Dispatch)
     const yesButton = useRef();
     const noButton = useRef();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
@@ -25,13 +31,6 @@ export default function Bidder() {
     useEffect(() => {
         attach(state.inviteLink)
     }, [])
-
-    const container = {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        height: '200px',
-    }
 
     const fmt = (x) => reach.formatCurrency(x, 4);
     
@@ -47,6 +46,7 @@ export default function Bidder() {
         dispatch({var: 'potAmount', type: 'set', value: fmt(potBalance)})
         if ( reach.addressEq(attendeeAddress, state.account) ) {
             const balance = await getBalance(state.account);
+            dispatch({var: 'balance', type: 'set', value: balance})
         } else {
             handleOpen() 
         }
@@ -73,26 +73,55 @@ export default function Bidder() {
         const ctc = state.account.attach(backend, JSON.parse(ctcInfoStr));
         backend.Bidder(ctc, {auctionEnds, mayBid, placedBid});
     }
-
+    
     return (
-      <div style={container}>
-            <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} made the last bid</h1>
-            <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}</h1>
-            <hr/>
-            {state.mayBid ? 
-                <div>
-                    <h1>Make a bid of {state.bidAmount} {state.currencyAbbreviation}?</h1>
-                    <div>
-                        <button ref={yesButton}>Yes</button>
-                        <button ref={noButton}>No</button>
+        <Card style={{width: '100%', height: '100%'}}>
+            <CardContent style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                <Typography gutterBottom variant="h5" component="h2">
+                    <Button variant="contained" style={{marginRight: '10px'}}>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} </Button>
+                    made the last bid
+                </Typography>
+                <Divider style={{width: '50%'}}/>
+                <Typography gutterBottom variant="h5" component="h5">
+                    Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}
+                </Typography>
+                <Divider style={{width: '50%'}}/>
+                {state.mayBid ? 
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                        <Typography gutterBottom variant="h5" component="h5">
+                            Make a bid of {state.bidAmount} {state.currencyAbbreviation}?
+                        </Typography>
+                        <ButtonGroup aria-label="outlined button group">
+                            <Button ref={yesButton}>Yes</Button>
+                            <Button ref={noButton}>No</Button>
+                        </ButtonGroup>
                     </div>
-                </div>
-            :
-                <div>
-                    <h1>...Waiting for next bidding cycle to start...</h1>
-                </div>
-            }     
-            <Popup {...popupProps}/>       
-      </div>
+                :
+                    <Typography gutterBottom variant="h5" component="h5">
+                        ...Waiting for next bidding cycle to start...
+                    </Typography>
+                }
+            </CardContent>
+            <Popup {...popupProps}/>
+        </Card>
+    //   <div style={container}>
+    //         <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} made the last bid</h1>
+    //         <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}</h1>
+    //         <hr/>
+    //         {state.mayBid ? 
+    //             <div>
+    //                 <h1>Make a bid of {state.bidAmount} {state.currencyAbbreviation}?</h1>
+    //                 <div>
+    //                     <button ref={yesButton}>Yes</button>
+    //                     <button ref={noButton}>No</button>
+    //                 </div>
+    //             </div>
+    //         :
+    //             <div>
+    //                 <h1>...Waiting for next bidding cycle to start...</h1>
+    //             </div>
+    //         }     
+    //         <Popup {...popupProps}/>       
+    //   </div>
     )
 }
