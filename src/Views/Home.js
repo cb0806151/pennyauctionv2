@@ -24,9 +24,9 @@ export default function Home() {
     }
 
     return (
-        <div>
-            {(state.account === undefined) ? <Button variant="contained" color="secondary" style={{width: '100%', marginTop: '20px'}}>Please connect your wallet to use the application</Button> : null}
-            <Grid container spacing={3} style={{height: 'calc(99vh - 64px)', marginTop: '10px'}}>
+        <Card style={{width: '100%', height: '100%'}}>
+            {(state.account === undefined) ? <Button variant="contained" color="secondary" style={{width: '100%'}}>Please connect your wallet to use the application</Button> : null}
+            <Grid container spacing={3} style={{height: '100%', padding: '20px 20px 0px 20px'}}>
                 <Grid item xs={12} sm={6} height="100%" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <Card style={{width: '100%', height: '100%'}}>
                         <CardContent style={{...startAuctionImage, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -42,6 +42,6 @@ export default function Home() {
                     </Card>
                 </Grid>
             </Grid>
-        </div>
+        </Card>
     )
 }

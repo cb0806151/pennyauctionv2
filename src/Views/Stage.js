@@ -18,7 +18,7 @@ export default function Stage() {
     return (
         <Box>
             <Navbar />
-            <Container>
+            <Container style={{height: 'calc(95vh - 64px)', marginTop: '20px'}}>
                 {renderPage(state.page, Exports)}
             </Container>
         </Box>
