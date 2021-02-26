@@ -1,26 +1,15 @@
 import React, { useContext, createRef } from 'react';
 import { CoreState } from '../Util/CoreState';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 
 export default function JoinAuction() {
     const dispatch = useContext(CoreState.Dispatch)
     const inviteTextArea = createRef();
-
-    const inviteInput = {
-        width: '50%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column'
-    }
-
-    const container = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '200px',
-    }
     
     const goToBiddingPage = async () => {
         let inviteLink = inviteTextArea.current.value;
@@ -30,11 +19,21 @@ export default function JoinAuction() {
     }
 
     return (
-      <div style={container}>
-          <div style={inviteInput}>
-              <textarea ref={inviteTextArea} style={{width: '50%', height: '50%'}}></textarea>
-              <button onClick={() => goToBiddingPage()}>Submit Invite</button>
-          </div>
-      </div>
+        <Card style={{width: '100%', height: '100%'}}>
+            <CardContent style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                <Typography gutterBottom variant="h5" component="h2">
+                    Auction Invite Entry
+                </Typography>
+                <TextField
+                    ref={inviteTextArea}
+                    style={{width: '80%', marginBottom: '20px'}}
+                    id="outlined-multiline-static"
+                    label="Invite"
+                    multiline
+                    rows={4}
+                    variant="outlined" />
+                <Button variant="outlined" color="inherit" onClick={() => goToBiddingPage()}>Submit Invite</Button>
+            </CardContent>
+        </Card>
     )
 }
