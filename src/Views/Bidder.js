@@ -27,6 +27,10 @@ export default function Bidder() {
     message: "Somone bid before you could",
   };
 
+  useEffect(() => {
+    attach(state.inviteLink);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const fmt = (x) => reach.formatCurrency(x, 4);
 
   const getBalance = async (who) => fmt(await reach.balanceOf(who));
@@ -71,8 +75,6 @@ export default function Bidder() {
     const ctc = state.account.attach(backend, JSON.parse(ctcInfoStr));
     backend.Bidder(ctc, { auctionEnds, mayBid, placedBid });
   };
-
-  useEffect(attach(state.inviteLink), []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Card style={{ width: "100%", height: "100%" }}>
@@ -126,24 +128,5 @@ export default function Bidder() {
       </CardContent>
       <Popup {...popupProps} />
     </Card>
-    //   <div style={container}>
-    //         <h1>{getAddressWording(state.lastBidAddress, state.account.networkAccount.address)} made the last bid</h1>
-    //         <h1>Current pot balance: {state.potAmount === 0 ? "...one moment please" : state.potAmount} {state.currencyAbbreviation}</h1>
-    //         <hr/>
-    //         {state.mayBid ?
-    //             <div>
-    //                 <h1>Make a bid of {state.bidAmount} {state.currencyAbbreviation}?</h1>
-    //                 <div>
-    //                     <button ref={yesButton}>Yes</button>
-    //                     <button ref={noButton}>No</button>
-    //                 </div>
-    //             </div>
-    //         :
-    //             <div>
-    //                 <h1>...Waiting for next bidding cycle to start...</h1>
-    //             </div>
-    //         }
-    //         <Popup {...popupProps}/>
-    //   </div>
   );
 }
