@@ -31,11 +31,11 @@ export default function Explanation(props) {
           first to bid 1% of the current pot in a series of rounds.
           <br />
           <br />
-          After each bid the deadline is reset to its inital value. However, if
+          After each bid the deadline is reset to its initial value. However, if
           it ticks all the way down the auction ends and the last Attendee to
           make a bid wins the pot.
         </DialogContentText>
-      </DialogContent>
+      </DialogContent><br /><br />
       <DialogActions>
         <Button onClick={props.handleClose} color="primary" autoFocus>
           Okay

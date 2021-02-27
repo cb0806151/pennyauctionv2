@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# The Reach Penny Auction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A penny auction is a rather simple bidding game.
+<br /><br />
+An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.
+<br /><br />
+Attendees use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.
+<br /><br />
+After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Attendee to make a bid wins the pot.
+<br /><br />
 
-## Available Scripts
+## Development Log
 
-In the project directory, you can run:
+2/15/21
+- create github repo
+- establish create react app foundation
+- establish reach foundation
+- create 'connect wallet' button
+- design prototype pages
 
-### `yarn start`
+2/16/21
+- break designs down into components
+- spa or multi page application? SPA
+- download algo signer
+- download and install forked algo signer
+- test forked algo signer
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2/17/21
+- decide on what to use for state? built- in react state
+- decide on format to use for spa? what was used in tut- 8
+- functional components or classes? functional
+- determine correct architecture (state, pages, utilities, etc)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2/18/21
+- design and test the state architecture
+- design and test the spa architecture
+- design a rough approximation of the state
+- Implement the nav bar component
+- Implement the nav title
+- Implement the connect wallet component
 
-### `yarn test`
+2/19/21
+- add dropdown with functioning faucet to wallet component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2/20/21
+- create tablet button component
+- standardize component export pattern
+- refactor state to allow for component updates
 
-### `yarn build`
+2/21/21
+- create setter component
+- create start auction page
+- create join auction page
+- create better page
+- create auctioneer page
+- create auction end page
+- remove test page
+- determine input value checking system
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2/22/21
+- create hovering message component
+- set up first part of the auctioneer contract
+- set up first part of the better contract
+- refactor value setting page
+- set up second part of the contract
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2/23/21
+- hook up pot amount displaying at end
+- hook up winner address displaying at end
+- create function that notifies the auctioneer of a change in the value of the pot
+- hook up last bidder address displaying
+- show auctioneers address as initial bid address
+- show the initial pot amount
+- show the amount the user will be bidding
+- show the currency being used
+- standardize usage of React.useContext or useContext
+- display message noting that the user is waiting for the next bidding cycle
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2/24/21
+- rename better to bidder and related verbage
+- install style library
+- create explanation of a penny auction 
+- Display alert when bid fails
+- style navbar
+- style connect wallet
+- style message notice
+- style home page
 
-### `yarn eject`
+2/25/21
+- style start auction page
+- style join auction page
+- style bidder page
+- style auctioneer page
+- style auction ends page
+- update balance after bid is placed
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2/26/21
+- create test file
+- implement prettier
+- check if mayBet needs the potbalance
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2/27/21
+- update readme
+- put designs into the repository
+put currency abbreviation on the StartAuction page  
+put notice about block time near the deadline entry on the StartAuction page  
+how to get the program to receive messages in parallel?
+<br><br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Edgecases:
+- If the contract has ended, the user was still being asked if they want to bid, they submit a bid, then they will lose their bid since its headed to a dead contract.
+- If the contract has ended and a user inputs the invite, then there is no way to catch the error that will result
+<br><br>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Notes
+- Build it to work with ETH first and then change over the connector and faucet to ALGO once its done
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
