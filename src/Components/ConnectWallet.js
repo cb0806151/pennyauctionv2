@@ -106,7 +106,8 @@ export default function ConnectWallet() {
                   <Button onClick={async () => depositFunds()}>Add</Button>
                 </InputAdornment>
               }
-              labelWidth={70}
+              labelWidth={60}
+              autoComplete="off"
             />
           </FormControl>
         </MenuItem>

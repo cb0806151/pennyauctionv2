@@ -35,7 +35,7 @@ export default function Explanation(props) {
           it ticks all the way down the auction ends and the last Attendee to
           make a bid wins the pot.
         </DialogContentText>
-      </DialogContent><br /><br />
+      </DialogContent>
       <DialogActions>
         <Button onClick={props.handleClose} color="primary" autoFocus>
           Okay

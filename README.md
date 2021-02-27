@@ -102,8 +102,10 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 2/27/21
 - update readme
 - put designs into the repository
-put currency abbreviation on the StartAuction page  
-put notice about block time near the deadline entry on the StartAuction page  
+- put currency abbreviation on the StartAuction page  
+- put notice about block time near the deadline entry on the StartAuction page  
+- disable autocomplete on input fields  
+
 how to get the program to receive messages in parallel?
 <br><br>
 
