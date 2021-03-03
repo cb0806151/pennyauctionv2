@@ -106,11 +106,16 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - put notice about block time near the deadline entry on the StartAuction page  
 - disable autocomplete on input fields  
 
+3/2/21
+- add extra line inbetween exit and winner on AuctionEnds page  
+- fix decimal value trim error  
+
+display a popup message when an input is invalid  
 how to get the program to receive messages in parallel?
 <br><br>
 
 ## Edgecases:
-- If the contract has ended, the user was still being asked if they want to bid, they submit a bid, then they will lose their bid since its headed to a dead contract.
+- If the contract has ended and a bidder was still being asked if they want to bid, then they run the risk of sending the bid the bid to a dead contract (ie. losing their bid) if they do bid. This is because the check for their bid is a promise and they won't be notified of the contract closing until after that promise resolves
 - If the contract has ended and a user inputs the invite, then there is no way to catch the error that will result
 <br><br>
 

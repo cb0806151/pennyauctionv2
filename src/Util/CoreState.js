@@ -7,8 +7,9 @@ const reducer = (state, action) => {
   let update = {};
   switch (action.type) {
     case "increment":
-      if (Number.isNaN(parseInt(action.value))) return state;
-      update[action.var] = parseInt(state[action.var]) + parseInt(action.value);
+      if (Number.isNaN(parseFloat(action.value))) return state;
+      update[action.var] =
+        parseFloat(state[action.var]) + parseFloat(action.value);
       return {
         ...state,
         ...update,

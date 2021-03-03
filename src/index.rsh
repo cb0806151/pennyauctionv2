@@ -22,8 +22,8 @@ export const main =
     Reach.App(
         {},
         [
-            ['Auctioneer', Auc], 
-            ['class', 'Bidder', Bid]
+            Participant('Auctioneer', Auc), 
+            ParticipantClass('Bidder', Bid)
         ],
         (Auctioneer, Bidder) => {
             const auctionEnds = (winnerAddress) => {

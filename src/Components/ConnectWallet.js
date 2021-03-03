@@ -46,6 +46,7 @@ export default function ConnectWallet() {
 
   const validateInput = (value) => {
     if (Number.isNaN(parseInt(value))) return 0;
+    if (value.toString().split(".")[1].length > 15) return 0;
     if (value < 0) return 0;
     return value;
   };

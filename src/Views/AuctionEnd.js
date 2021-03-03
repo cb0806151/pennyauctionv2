@@ -35,6 +35,7 @@ export default function AuctionEnd() {
           </Button>
           won the pot worth {state.potAmount} {state.currencyAbbreviation}!
         </Typography>
+        <Divider style={{ width: "50%", margin: "10px" }} />
         <Button
           variant="outlined"
           color="inherit"
