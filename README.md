@@ -111,7 +111,9 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - fix decimal value trim error  
 
 display a popup message when an input is invalid  
-how to get the program to receive messages in parallel?
+get rid of the 'don't bid' button  
+integrate the algorand network  
+record the video explanation  
 <br><br>
 
 ## Edgecases:

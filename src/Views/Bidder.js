@@ -15,7 +15,6 @@ export default function Bidder() {
   const state = useContext(CoreState.State);
   const dispatch = useContext(CoreState.Dispatch);
   const yesButton = useRef();
-  const noButton = useRef();
   const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
@@ -61,9 +60,6 @@ export default function Bidder() {
     if (mayBid === false) return mayBid;
     const bidStatus = await new Promise((resolve) => {
       yesButton.current.addEventListener("click", (e) => resolve(true), {
-        once: true,
-      });
-      noButton.current.addEventListener("click", (e) => resolve(false), {
         once: true,
       });
     });
@@ -117,7 +113,6 @@ export default function Bidder() {
             </Typography>
             <ButtonGroup aria-label="outlined button group">
               <Button ref={yesButton}>Yes</Button>
-              <Button ref={noButton}>No</Button>
             </ButtonGroup>
           </div>
         ) : (
