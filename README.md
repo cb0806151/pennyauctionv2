@@ -110,10 +110,13 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - add extra line inbetween exit and winner on AuctionEnds page  
 - fix decimal value trim error  
 
-display a popup message when an input is invalid  
-get rid of the 'don't bid' button  
+3/8/21
+- get rid of the 'don't bid' button  
+- display a popup message when an input is invalid  
+
 integrate the algorand network  
 record the video explanation  
+update readme with setup instructions  
 <br><br>
 
 ## Edgecases:

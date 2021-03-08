@@ -1,6 +1,7 @@
 import * as stdlib from "@reach-sh/stdlib/ETH";
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
+import Popup from "../Components/Popup";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -17,6 +18,17 @@ export default function ConnectWallet() {
   const [faucet, setFaucet] = useState(undefined);
   const [anchorEl, setAnchorEl] = useState(null);
   const [amount, setAmount] = useState();
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const popupProps = {
+    open: open,
+    handleClose: () => {
+      setOpen(false);
+      setErrorMessage("");
+    },
+    message: errorMessage,
+  };
 
   const updateAmount = (event) => setAmount(event.target.value);
 
@@ -45,9 +57,18 @@ export default function ConnectWallet() {
   };
 
   const validateInput = (value) => {
-    if (Number.isNaN(parseInt(value))) return 0;
-    if (value.toString().split(".")[1].length > 15) return 0;
-    if (value < 0) return 0;
+    value = parseFloat(value);
+    let errorMessages = ``;
+    if (Number.isNaN(value))
+      errorMessages = `${errorMessages}\nNot a valid number`;
+    if (value < 0)
+      errorMessages = `${errorMessages}\nNumber must be greater than zero`;
+    setErrorMessage(errorMessages);
+    if (errorMessages !== ``) {
+      setOpen(true);
+      return 0;
+    }
+
     return value;
   };
 
@@ -112,6 +133,7 @@ export default function ConnectWallet() {
             />
           </FormControl>
         </MenuItem>
+        <Popup {...popupProps} />
       </Menu>
     </div>
   );

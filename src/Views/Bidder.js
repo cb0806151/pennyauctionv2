@@ -15,14 +15,11 @@ export default function Bidder() {
   const state = useContext(CoreState.State);
   const dispatch = useContext(CoreState.Dispatch);
   const yesButton = useRef();
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const popupProps = {
-    open: open,
-    handleClose: () => handleClose(),
+    open: popupOpen,
+    handleClose: () => setPopupOpen(false),
     message: "Somone bid before you could",
   };
 
@@ -46,7 +43,7 @@ export default function Bidder() {
       const balance = await getBalance(state.account);
       dispatch({ var: "balance", type: "set", value: balance });
     } else {
-      handleOpen();
+      setPopupOpen(true);
     }
   };
 
