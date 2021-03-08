@@ -8,7 +8,36 @@ Attendees use those invites to join an auction and compete to be the first to bi
 <br /><br />
 After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Attendee to make a bid wins the pot.
 <br /><br />
+---
+## Environment Setup Instructions
 
+### Windows
+
+- clone the repository
+- open a terminal to the pennyauctionv2 folder 
+- from there run the command `yarn install`
+- once that has completed run `cd src`
+- run the `wsl` command to switch over to linux
+- run the `curl https://raw.githubusercontent.com/reach-sh/reach-lang/master/reach -o reach ; chmod +x reach` command to download reach into the src folder
+- run the `./reach version` command to ensure it installed
+- run the `./reach react` command. This will fail with errors, but it will compile the contract and start up ganache
+- press Ctrl + C to halt ./reach react
+- start up a new terminal and navigate to the pennyauctionv2 folder 
+- now run the `yarn start` command to run the application
+
+### Linux
+
+- clone the repository
+- open a terminal to the pennyauctionv2 folder 
+- from there run the command `yarn install`
+- once that has completed run `cd src`
+- run the `curl https://raw.githubusercontent.com/reach-sh/reach-lang/master/reach -o reach ; chmod +x reach` command to download reach into the src folder
+- run the `./reach version` command to ensure it installed
+- run the `./reach react` command. This will fail with errors, but it will compile the contract + start up ganache
+- press Ctrl + C to halt ./reach react
+- run the `cd ..` command to navigate back to the pennyauctionv2 folder 
+- now run the `yarn start` command to run the application
+---
 ## Development Log
 
 2/15/21
@@ -113,17 +142,18 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 3/8/21
 - get rid of the 'don't bid' button  
 - display a popup message when an input is invalid  
+- update readme with setup instructions  
 
 integrate the algorand network  
-record the video explanation  
-update readme with setup instructions  
-<br><br>
-
+record the video explanation
+<br>
+---
 ## Edgecases:
 - If the contract has ended and a bidder was still being asked if they want to bid, then they run the risk of sending the bid the bid to a dead contract (ie. losing their bid) if they do bid. This is because the check for their bid is a promise and they won't be notified of the contract closing until after that promise resolves
+    - This edgecase is a metamask artifact ^
 - If the contract has ended and a user inputs the invite, then there is no way to catch the error that will result
 <br><br>
-
+---
 ## Notes
 - Build it to work with ETH first and then change over the connector and faucet to ALGO once its done
 
