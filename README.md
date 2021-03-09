@@ -144,6 +144,9 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - display a popup message when an input is invalid  
 - update readme with setup instructions  
 
+3/9/21
+- allow manually setting the deadline
+
 integrate the algorand network  
 record the video explanation
 <br>

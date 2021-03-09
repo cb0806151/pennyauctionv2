@@ -54,11 +54,12 @@ export const main =
                     (() => {
                         const address = this;
                         const bidValue = getBid(currentPot);
-                        Bidder.only(() => interact.placedBid(address, currentPot + bidValue));
-                        Auctioneer.only(() => interact.updateBalance(currentPot + bidValue));
-                        return [ currentPot + bidValue, true, address ];
+                        const updatedPotValue = currentPot + bidValue;
+                        Bidder.only(() => interact.placedBid(address, updatedPotValue));
+                        Auctioneer.only(() => interact.updateBalance(updatedPotValue));
+                        return [ updatedPotValue, true, address ];
                     }))
-                .timeout(3, () => {
+                .timeout(deadline, () => {
                     Auctioneer.publish();
                     return [ currentPot, false, winnerAddress ];
                     });
