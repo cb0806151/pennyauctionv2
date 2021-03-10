@@ -31,7 +31,7 @@ export default function StartAuction() {
     const params = {
       deadline: deadline,
       potAmount: reach.parseCurrency(potAmount),
-      potAddress: state.account,
+      initialAddress: state.account,
     };
     return params;
   };

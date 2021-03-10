@@ -8,7 +8,7 @@ const Auc = {
     getParams: Fun([], Object({
         deadline: UInt,
         potAmount: UInt,
-        potAddress: Address,
+        initialAddress: Address,
     })), 
     updateBalance: Fun([UInt], Null),
 };
@@ -37,14 +37,14 @@ export const main =
             };
 
             Auctioneer.only(() => {
-                const { deadline, potAmount, potAddress } =
+                const { deadline, potAmount, initialAddress } =
                   declassify(interact.getParams());
             });
-            Auctioneer.publish(deadline, potAmount, potAddress)
+            Auctioneer.publish(deadline, potAmount, initialAddress)
                     .pay(potAmount);
 
             const [ currentPot, auctionRunning, winnerAddress ] =
-                parallel_reduce([ potAmount, true, potAddress ])
+                parallel_reduce([ potAmount, true, initialAddress ])
                 .invariant(balance() == currentPot)
                 .while(auctionRunning)
                 .case(Bidder, (() => ({

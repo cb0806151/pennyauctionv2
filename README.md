@@ -4,9 +4,9 @@ A penny auction is a rather simple bidding game.
 <br /><br />
 An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.
 <br /><br />
-Attendees use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.
+Bidders use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.
 <br /><br />
-After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Attendee to make a bid wins the pot.
+After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Bidder to make a bid wins the pot.
 <br /><br />
 ---
 ## Environment Setup Instructions

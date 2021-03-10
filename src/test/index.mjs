@@ -37,7 +37,7 @@ const numberOfBidders = 2;
             getParams: () => ({
                     deadline: 5,
                     potAmount: stdlib.parseCurrency(1),
-                    potAddress: auctioneerAccount,
+                    initialAddress: auctioneerAccount,
             }),
             updateBalance: (currentPotBalance) => {
                 console.log(`The Auctioneer sees that the pot is now ${format(currentPotBalance)}`);

@@ -36,10 +36,10 @@ export default function Bidder() {
     dispatch({ var: "page", type: "set", value: "AuctionEnd" });
   };
 
-  const placedBid = async (attendeeAddress, potBalance) => {
-    dispatch({ var: "lastBidAddress", type: "set", value: attendeeAddress });
+  const placedBid = async (bidderAddress, potBalance) => {
+    dispatch({ var: "lastBidAddress", type: "set", value: bidderAddress });
     dispatch({ var: "potAmount", type: "set", value: fmt(potBalance) });
-    if (reach.addressEq(attendeeAddress, state.account)) {
+    if (reach.addressEq(bidderAddress, state.account)) {
       const balance = await getBalance(state.account);
       dispatch({ var: "balance", type: "set", value: balance });
     } else {
