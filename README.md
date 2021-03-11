@@ -154,8 +154,12 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 
 3/11/21
 - integrate the algorand network
+- fix application title
+- get loading button for contract deploy  
 
-record the rest of the demo video 
+Check balance before submitting contract  
+get favicon  
+record the rest of the demo video  
 </p>
 </details>
 <details><summary>Edgecases</summary>

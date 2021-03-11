@@ -9,12 +9,14 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Typography from "@material-ui/core/Typography";
+import LoadingButton from "@material-ui/lab/LoadingButton";
 
 export default function StartAuction() {
   const state = useContext(CoreState.State);
   const dispatch = useContext(CoreState.Dispatch);
   const [deadline, setDeadline] = useState(0);
   const [potAmount, setPotAmount] = useState(0);
+  const [contractDeploying, setContractDeploying] = useState(false);
 
   const fmt = (x) => reach.formatCurrency(x, 4);
 
@@ -44,6 +46,7 @@ export default function StartAuction() {
   };
 
   const startAuction = async () => {
+    setContractDeploying(true);
     await deploy();
     dispatch({ var: "potAmount", type: "set", value: potAmount });
     dispatch({ var: "page", type: "set", value: "Auctioneer" });
@@ -85,19 +88,25 @@ export default function StartAuction() {
             autoComplete="off"
           />
         </FormControl>
-        <Button
-          variant="outlined"
-          color="inherit"
-          disabled={
-            deadline === 0 ||
-            potAmount === 0 ||
-            deadline.length === 0 ||
-            potAmount.length === 0
-          }
-          onClick={() => startAuction()}
-        >
-          Start Auction
-        </Button>
+        {contractDeploying ? (
+          <LoadingButton pending variant="outlined">
+            Submit
+          </LoadingButton>
+        ) : (
+          <Button
+            variant="outlined"
+            color="inherit"
+            disabled={
+              deadline === 0 ||
+              potAmount === 0 ||
+              deadline.length === 0 ||
+              potAmount.length === 0
+            }
+            onClick={() => startAuction()}
+          >
+            Start Auction
+          </Button>
+        )}
       </CardContent>
     </Card>
   );
