@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import * as backend from "../build/index.main.mjs";
 import * as reach from "@reach-sh/stdlib/ALGO";
+import Popup from "../Components/Popup";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -17,6 +18,17 @@ export default function StartAuction() {
   const [deadline, setDeadline] = useState(0);
   const [potAmount, setPotAmount] = useState(0);
   const [contractDeploying, setContractDeploying] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const popupProps = {
+    open: open,
+    handleClose: () => {
+      setOpen(false);
+      setErrorMessage("");
+    },
+    message: errorMessage,
+  };
 
   const fmt = (x) => reach.formatCurrency(x, 4);
 
@@ -45,7 +57,34 @@ export default function StartAuction() {
     dispatch({ var: "inviteLink", type: "set", value: ctcInfoStr });
   };
 
+  const invalidAuctionAttributes = () => {
+    let errorMessages = ``;
+
+    if (Number.isInteger(deadline)) {
+      if (deadline <= 0) errorMessages = `Deadline must be greater than zero`;
+    } else {
+      errorMessages = `${errorMessages} Deadline must be an integer`;
+    }
+
+    if (Number.isNaN(potAmount)) {
+      errorMessages = `${errorMessages} Initial pot balance must be integer or float`;
+    } else {
+      if (potAmount <= 0)
+        errorMessages = `${errorMessages} Initial pot balance must be greater than zero`;
+      if (potAmount >= state.balance)
+        errorMessages = `${errorMessages} Initial pot balance must be less than wallet balance`;
+    }
+
+    setErrorMessage(errorMessages);
+    if (errorMessages !== ``) {
+      setOpen(true);
+      return true;
+    }
+    return false;
+  };
+
   const startAuction = async () => {
+    if (invalidAuctionAttributes()) return;
     setContractDeploying(true);
     await deploy();
     dispatch({ var: "potAmount", type: "set", value: potAmount });
@@ -71,7 +110,7 @@ export default function StartAuction() {
           <OutlinedInput
             id="deadline-input"
             type={"text"}
-            onChange={(event) => setDeadline(event.target.value)}
+            onChange={(event) => setDeadline(parseInt(event.target.value))}
             labelWidth={150}
             autoComplete="off"
           />
@@ -83,7 +122,7 @@ export default function StartAuction() {
           <OutlinedInput
             id="initial-balance-input"
             type={"text"}
-            onChange={(event) => setPotAmount(event.target.value)}
+            onChange={(event) => setPotAmount(parseInt(event.target.value))}
             labelWidth={200}
             autoComplete="off"
           />
@@ -108,6 +147,7 @@ export default function StartAuction() {
           </Button>
         )}
       </CardContent>
+      <Popup {...popupProps} />
     </Card>
   );
 }
