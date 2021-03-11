@@ -84,7 +84,7 @@ export default function ConnectWallet() {
       {state.account === undefined ? (
         <Button
           disabled={processing}
-          aria-controls="simple-menu"
+          aria-controls="wallet-menu"
           aria-haspopup="true"
           variant="outlined"
           color="inherit"
@@ -94,7 +94,7 @@ export default function ConnectWallet() {
         </Button>
       ) : (
         <Button
-          aria-controls="simple-menu"
+          aria-controls="wallet-menu"
           aria-haspopup="true"
           variant="outlined"
           color="inherit"
@@ -105,7 +105,7 @@ export default function ConnectWallet() {
       )}
 
       <Menu
-        id="simple-menu"
+        id="wallet-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -116,11 +116,9 @@ export default function ConnectWallet() {
         </MenuItem>
         <MenuItem>
           <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Amount
-            </InputLabel>
+            <InputLabel htmlFor="balance-input">Amount</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="balance-input"
               type={"text"}
               onChange={updateAmount}
               endAdornment={

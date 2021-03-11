@@ -37,7 +37,6 @@ export default function JoinAuction() {
         <TextField
           onChange={(event) => setInviteLink(event.target.value)}
           style={{ width: "80%", marginBottom: "20px" }}
-          id="outlined-multiline-static"
           label="Invite"
           multiline
           rows={4}

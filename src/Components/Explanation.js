@@ -14,11 +14,9 @@ export default function Explanation(props) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">
-        {"How A Penny Auction Works"}
-      </DialogTitle>
+      <DialogTitle>{"How A Penny Auction Works"}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText>
           A penny auction is a rather simple bidding game.
           <br />
           <br />
