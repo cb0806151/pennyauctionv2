@@ -1,10 +1,15 @@
 # The Reach Penny Auction  
-#### A penny auction is a rather simple bidding game.
-#### An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.
-#### Bidders use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.
-#### After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Bidder to make a bid wins the pot.
----
-## Environment Setup Instructions
+
+<details><summary>Description</summary>
+<p>
+A penny auction is a rather simple bidding game.  
+An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.  
+Bidders use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.  
+After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Bidder to make a bid wins the pot.  
+</p>
+</details>
+<details><summary>Environment Setup Instructions</summary>
+<p>
 
 ### Windows
 
@@ -32,8 +37,10 @@
 - press Ctrl + C to halt ./reach react
 - run the `cd ..` command to navigate back to the pennyauctionv2 folder 
 - now run the `yarn start` command to run the application
----
-## Development Log
+</p>
+</details>
+<details><summary>Development Log</summary>
+<p>
 
 2/15/21
 - create github repo
@@ -142,15 +149,17 @@
 3/9/21
 - allow manually setting the deadline
 
-#### integrate the algorand network  
-#### record the video explanation  
----  
-## Edgecases:
+integrate the algorand network  
+record the video explanation  
+</p>
+</details>
+<details><summary>Edgecases</summary>
+<p>  
+
 - If the contract has ended and a bidder was still being asked if they want to bid, then they run the risk of sending the bid the bid to a dead contract (ie. losing their bid) if they do bid. This is because the check for their bid is a promise and they won't be notified of the contract closing until after that promise resolves
     - This edgecase is a metamask artifact ^
-- If the contract has ended and a user inputs the invite, then there is no way to catch the error that will result
-<br><br>
----
-## Notes
-- Build it to work with ETH first and then change over the connector and faucet to ALGO once its done
+- If the contract has ended and a user inputs the invite, then there is no way to catch the error that will result  
+
+</p>
+</details>
 
