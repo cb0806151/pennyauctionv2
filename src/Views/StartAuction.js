@@ -64,11 +64,9 @@ export default function StartAuction() {
           Set Auction Attributes
         </Typography>
         <FormControl variant="outlined" style={{ marginBottom: "20px" }}>
-          <InputLabel htmlFor="outlined-adornment-password">
-            Deadline (in blocks)
-          </InputLabel>
+          <InputLabel htmlFor="deadline-input">Deadline (in blocks)</InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
+            id="deadline-input"
             type={"text"}
             onChange={(event) => setDeadline(event.target.value)}
             labelWidth={150}
@@ -76,11 +74,11 @@ export default function StartAuction() {
           />
         </FormControl>
         <FormControl variant="outlined" style={{ marginBottom: "20px" }}>
-          <InputLabel htmlFor="outlined-adornment-password">
+          <InputLabel htmlFor="initial-balance-input">
             Initial Pot Balance (in {state.applicationNetwork})
           </InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
+            id="initial-balance-input"
             type={"text"}
             onChange={(event) => setPotAmount(event.target.value)}
             labelWidth={200}

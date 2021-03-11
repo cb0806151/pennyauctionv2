@@ -1,10 +1,13 @@
 import * as reach from "@reach-sh/stdlib/ALGO";
 
 export const getAddressWording = (address, targetAddress) => {
-  return reach.addressEq(
-    address || "0x0000000000000000000000000000000000000000",
-    targetAddress || "0x0000000000000000000000000000000000000000"
-  )
-    ? "You"
-    : address;
+  let defaultAddress = "0x0000000000000000000000000000000000000000";
+  let addressesEquate = reach.addressEq(
+    address || defaultAddress,
+    targetAddress || defaultAddress
+  );
+  if (addressesEquate) address = "You";
+  if (address === undefined) address = "...";
+  if (address !== undefined) address = `${address.substring(0, 5)}...`;
+  return address;
 };
