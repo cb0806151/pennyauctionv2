@@ -143,9 +143,8 @@
 - allow manually setting the deadline
 
 #### integrate the algorand network  
-#### record the video explanation
-<br>
----
+#### record the video explanation  
+---  
 ## Edgecases:
 - If the contract has ended and a bidder was still being asked if they want to bid, then they run the risk of sending the bid the bid to a dead contract (ie. losing their bid) if they do bid. This is because the check for their bid is a promise and they won't be notified of the contract closing until after that promise resolves
     - This edgecase is a metamask artifact ^
