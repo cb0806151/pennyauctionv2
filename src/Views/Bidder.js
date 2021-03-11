@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import Popup from "../Components/Popup";
 import { CoreState } from "../Util/CoreState";
 import * as backend from "../build/index.main.mjs";
-import * as reach from "@reach-sh/stdlib/ETH";
+import * as reach from "@reach-sh/stdlib/ALGO";
 import { getAddressWording } from "../Util/UtilityFunctions";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -82,10 +82,7 @@ export default function Bidder() {
       >
         <Typography gutterBottom variant="h5" component="h2">
           <Button variant="contained" style={{ marginRight: "10px" }}>
-            {getAddressWording(
-              state.lastBidAddress,
-              state.account.networkAccount.address
-            )}{" "}
+            {getAddressWording(state.lastBidAddress, state.account)}{" "}
           </Button>
           made the last bid
         </Typography>
@@ -93,7 +90,7 @@ export default function Bidder() {
         <Typography gutterBottom variant="h5" component="h5">
           Current pot balance:{" "}
           {state.potAmount === 0 ? "...one moment please" : state.potAmount}{" "}
-          {state.currencyAbbreviation}
+          {state.applicationNetwork}
         </Typography>
         <Divider style={{ width: "50%", margin: "10px" }} />
         {state.mayBid ? (
@@ -106,7 +103,7 @@ export default function Bidder() {
             }}
           >
             <Typography gutterBottom variant="h5" component="h5">
-              Make a bid of {state.bidAmount} {state.currencyAbbreviation}?
+              Make a bid of {state.bidAmount} {state.applicationNetwork}?
             </Typography>
             <ButtonGroup aria-label="outlined button group">
               <Button ref={yesButton}>Yes</Button>

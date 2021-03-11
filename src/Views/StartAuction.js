@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import * as backend from "../build/index.main.mjs";
-import * as reach from "@reach-sh/stdlib/ETH";
+import * as reach from "@reach-sh/stdlib/ALGO";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -77,7 +77,7 @@ export default function StartAuction() {
         </FormControl>
         <FormControl variant="outlined" style={{ marginBottom: "20px" }}>
           <InputLabel htmlFor="outlined-adornment-password">
-            Initial Pot Balance (in {state.currencyAbbreviation})
+            Initial Pot Balance (in {state.applicationNetwork})
           </InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"

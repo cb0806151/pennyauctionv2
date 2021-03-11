@@ -28,12 +28,9 @@ export default function AuctionEnd() {
         <Divider style={{ width: "50%", margin: "10px" }} />
         <Typography gutterBottom variant="h5" component="h3">
           <Button variant="contained" style={{ marginRight: "10px" }}>
-            {getAddressWording(
-              state.lastBidAddress,
-              state.account?.networkAccount?.address
-            )}
+            {getAddressWording(state.lastBidAddress, state.account)}
           </Button>
-          won the pot worth {state.potAmount} {state.currencyAbbreviation}!
+          won the pot worth {state.potAmount} {state.applicationNetwork}!
         </Typography>
         <Divider style={{ width: "50%", margin: "10px" }} />
         <Button

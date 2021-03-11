@@ -149,8 +149,13 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 3/9/21
 - allow manually setting the deadline
 
-integrate the algorand network  
-record the video explanation  
+3/10/21
+- record 4/5 of the demo video
+
+3/11/21
+- integrate the algorand network
+
+record the rest of the demo video 
 </p>
 </details>
 <details><summary>Edgecases</summary>

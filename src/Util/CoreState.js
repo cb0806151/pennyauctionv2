@@ -27,7 +27,7 @@ const reducer = (state, action) => {
 
 const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    currencyAbbreviation: "ETH",
+    applicationNetwork: "ALGO",
     balance: 0,
     page: "Home",
     account: undefined,

@@ -112,7 +112,7 @@ export default function ConnectWallet() {
         onClose={closeDropdown}
       >
         <MenuItem disabled>
-          Balance (in {state.currencyAbbreviation}): {state.balance}
+          Balance (in {state.applicationNetwork}): {state.balance}
         </MenuItem>
         <MenuItem>
           <FormControl variant="outlined">
