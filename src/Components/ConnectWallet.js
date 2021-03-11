@@ -1,4 +1,4 @@
-import * as stdlib from "@reach-sh/stdlib/ETH";
+import * as stdlib from "@reach-sh/stdlib/ALGO";
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import Popup from "../Components/Popup";

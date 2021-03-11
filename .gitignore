@@ -15,6 +15,7 @@
 /src/reach
 /src/build
 /src/docker-compose.yml.react
+/src/docker-compose.yml.devnet
 
 # misc
 .DS_Store
