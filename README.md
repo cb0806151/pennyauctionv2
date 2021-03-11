@@ -1,13 +1,8 @@
 # The Reach Penny Auction  
-<br /><br />
-A penny auction is a rather simple bidding game.
-<br /><br />
-An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.
-<br /><br />
-Bidders use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.
-<br /><br />
-After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Bidder to make a bid wins the pot.
-<br /><br />
+#### A penny auction is a rather simple bidding game.
+#### An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.
+#### Bidders use those invites to join an auction and compete to be the first to bid 1% of the current pot in a series of rounds.
+#### After each bid the deadline is reset to its initial value. However, if it ticks all the way down the auction ends and the last Bidder to make a bid wins the pot.
 ---
 ## Environment Setup Instructions
 
@@ -147,8 +142,8 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 3/9/21
 - allow manually setting the deadline
 
-integrate the algorand network  
-record the video explanation
+#### integrate the algorand network  
+#### record the video explanation
 <br>
 ---
 ## Edgecases:
