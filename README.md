@@ -1,5 +1,5 @@
-# The Reach Penny Auction
-
+# The Reach Penny Auction  
+<br /><br />
 A penny auction is a rather simple bidding game.
 <br /><br />
 An Auctioneer starts an auction by placing an initial amount in the pot and setting a deadline. Once the auction has started, they can send out invites.
