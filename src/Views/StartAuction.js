@@ -32,11 +32,15 @@ export default function StartAuction() {
 
   const fmt = (x) => reach.formatCurrency(x, 4);
 
+  const getBalance = async (who) => fmt(await reach.balanceOf(who));
+
   const updateBalance = (potBalance) => {
     dispatch({ var: "potAmount", type: "set", value: fmt(potBalance) });
   };
 
-  const auctionEnds = (winnerAddress) => {
+  const auctionEnds = async (winnerAddress) => {
+    const balance = await getBalance(state.account);
+    dispatch({ var: "balance", type: "set", value: balance });
     dispatch({ var: "lastBidAddress", type: "set", value: winnerAddress });
     dispatch({ var: "page", type: "set", value: "AuctionEnd" });
   };
@@ -87,6 +91,8 @@ export default function StartAuction() {
     if (invalidAuctionAttributes()) return;
     setContractDeploying(true);
     await deploy();
+    const balance = await getBalance(state.account);
+    dispatch({ var: "balance", type: "set", value: balance });
     dispatch({ var: "potAmount", type: "set", value: potAmount });
     dispatch({ var: "page", type: "set", value: "Auctioneer" });
   };

@@ -158,6 +158,8 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - get loading button for contract deploy  
 - check balance before submitting contract  
 - get favicon  
+- standardize naming of standard library import
+- update in-app balances on auction end
 
 record the rest of the demo video  
 </p>

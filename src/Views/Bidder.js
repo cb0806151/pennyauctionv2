@@ -32,6 +32,8 @@ export default function Bidder() {
   const getBalance = async (who) => fmt(await reach.balanceOf(who));
 
   const auctionEnds = async (winnerAddress) => {
+    const balance = await getBalance(state.account);
+    dispatch({ var: "balance", type: "set", value: balance });
     dispatch({ var: "lastBidAddress", type: "set", value: winnerAddress });
     dispatch({ var: "page", type: "set", value: "AuctionEnd" });
   };

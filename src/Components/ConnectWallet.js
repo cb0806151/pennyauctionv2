@@ -1,4 +1,4 @@
-import * as stdlib from "@reach-sh/stdlib/ALGO";
+import * as reach from "@reach-sh/stdlib/ALGO";
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import Popup from "../Components/Popup";
@@ -36,21 +36,21 @@ export default function ConnectWallet() {
 
   const connectWallet = async () => {
     setProcessing(true);
-    const account = await stdlib.getDefaultAccount();
+    const account = await reach.getDefaultAccount();
     dispatch({ var: "account", type: "set", value: account });
     await getWalletBalance(account);
   };
 
   const getWalletBalance = async (acc) => {
-    let balanceAtomic = await stdlib.balanceOf(acc);
-    let balance = stdlib.formatCurrency(balanceAtomic, 4);
+    let balanceAtomic = await reach.balanceOf(acc);
+    let balance = reach.formatCurrency(balanceAtomic, 4);
     dispatch({ var: "balance", type: "set", value: balance });
   };
 
   const openDropdown = async (event) => {
     setAnchorEl(event.currentTarget);
     try {
-      setFaucet(await stdlib.getFaucet());
+      setFaucet(await reach.getFaucet());
     } catch {
       setAnchorEl(null);
     }
@@ -75,7 +75,7 @@ export default function ConnectWallet() {
   const depositFunds = async () => {
     let funds = amount;
     funds = validateInput(funds);
-    await stdlib.transfer(faucet, state.account, stdlib.parseCurrency(funds));
+    await reach.transfer(faucet, state.account, reach.parseCurrency(funds));
     dispatch({ var: "balance", type: "increment", value: funds });
   };
 
