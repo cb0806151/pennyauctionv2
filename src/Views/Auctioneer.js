@@ -33,7 +33,7 @@ export default function Auctioneer() {
         </Button>
         <Divider style={{ width: "50%", margin: "10px" }} />
         <Typography gutterBottom variant="h5" component="h2">
-          Current pot balance: {state.potAmount} {state.currencyAbbreviation}
+          Current pot balance: {state.potAmount} {state.applicationNetwork}
         </Typography>
       </CardContent>
     </Card>

@@ -1,4 +1,4 @@
-import * as stdlib from "@reach-sh/stdlib/ETH";
+import * as stdlib from "@reach-sh/stdlib/ALGO";
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import Popup from "../Components/Popup";
@@ -112,7 +112,7 @@ export default function ConnectWallet() {
         onClose={closeDropdown}
       >
         <MenuItem disabled>
-          Balance (in {state.currencyAbbreviation}): {state.balance}
+          Balance (in {state.applicationNetwork}): {state.balance}
         </MenuItem>
         <MenuItem>
           <FormControl variant="outlined">
