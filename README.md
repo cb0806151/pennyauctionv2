@@ -161,6 +161,8 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - standardize naming of standard library import  
 - update in-app balances on auction end  
 - change structure to only fetch balance when opening wallet dropdown  
+- show loading bar when depositing funds  
+- fix text glitch when the bidder joins a contract  
 
 record the rest of the demo video  
 </p>

@@ -83,9 +83,10 @@ export default function Bidder() {
         </Typography>
         <Divider style={{ width: "50%", margin: "10px" }} />
         <Typography gutterBottom variant="h5" component="h5">
-          Current pot balance:{" "}
-          {state.potAmount === 0 ? "...one moment please" : state.potAmount}{" "}
-          {state.applicationNetwork}
+          Current pot balance:
+          {state.potAmount === 0
+            ? " ...one moment please"
+            : ` ${state.potAmount} ${state.applicationNetwork}`}
         </Typography>
         <Divider style={{ width: "50%", margin: "10px" }} />
         {state.mayBid ? (

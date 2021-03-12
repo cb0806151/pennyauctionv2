@@ -9,6 +9,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default function ConnectWallet() {
   const state = useContext(CoreState.State);
@@ -20,6 +21,7 @@ export default function ConnectWallet() {
   const [amount, setAmount] = useState();
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [depositingFunds, setDepositingFunds] = useState(false);
 
   const popupProps = {
     open: open,
@@ -74,10 +76,12 @@ export default function ConnectWallet() {
   };
 
   const depositFunds = async () => {
+    setDepositingFunds(true);
     let funds = amount;
     funds = validateInput(funds);
     await reach.transfer(faucet, state.account, reach.parseCurrency(funds));
     dispatch({ var: "balance", type: "increment", value: funds });
+    setDepositingFunds(false);
   };
 
   return (
@@ -113,7 +117,12 @@ export default function ConnectWallet() {
         onClose={closeDropdown}
       >
         <MenuItem disabled>
-          Balance (in {state.applicationNetwork}): {state.balance}
+          Balance (in {state.applicationNetwork}):{" "}
+          {depositingFunds ? (
+            <LinearProgress style={{ width: "80%", margin: "0 10% 0 10px" }} />
+          ) : (
+            state.balance
+          )}
         </MenuItem>
         <MenuItem>
           <FormControl variant="outlined">
