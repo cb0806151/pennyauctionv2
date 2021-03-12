@@ -30,6 +30,10 @@ export default function ConnectWallet() {
     message: errorMessage,
   };
 
+  const fmt = (x) => reach.formatCurrency(x, 4);
+
+  const getBalance = async (who) => fmt(await reach.balanceOf(who));
+
   const updateAmount = (event) => setAmount(event.target.value);
 
   const closeDropdown = () => setAnchorEl(null);
@@ -38,17 +42,14 @@ export default function ConnectWallet() {
     setProcessing(true);
     const account = await reach.getDefaultAccount();
     dispatch({ var: "account", type: "set", value: account });
-    await getWalletBalance(account);
-  };
-
-  const getWalletBalance = async (acc) => {
-    let balanceAtomic = await reach.balanceOf(acc);
-    let balance = reach.formatCurrency(balanceAtomic, 4);
+    let balance = await getBalance(account);
     dispatch({ var: "balance", type: "set", value: balance });
   };
 
   const openDropdown = async (event) => {
     setAnchorEl(event.currentTarget);
+    const balance = await getBalance(state.account);
+    dispatch({ var: "balance", type: "set", value: balance });
     try {
       setFaucet(await reach.getFaucet());
     } catch {

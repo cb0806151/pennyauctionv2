@@ -153,13 +153,14 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - record 4/5 of the demo video
 
 3/11/21
-- integrate the algorand network
-- fix application title
+- integrate the algorand network  
+- fix application title  
 - get loading button for contract deploy  
 - check balance before submitting contract  
 - get favicon  
-- standardize naming of standard library import
-- update in-app balances on auction end
+- standardize naming of standard library import  
+- update in-app balances on auction end  
+- change structure to only fetch balance when opening wallet dropdown  
 
 record the rest of the demo video  
 </p>

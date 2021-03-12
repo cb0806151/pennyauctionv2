@@ -32,8 +32,6 @@ export default function Bidder() {
   const getBalance = async (who) => fmt(await reach.balanceOf(who));
 
   const auctionEnds = async (winnerAddress) => {
-    const balance = await getBalance(state.account);
-    dispatch({ var: "balance", type: "set", value: balance });
     dispatch({ var: "lastBidAddress", type: "set", value: winnerAddress });
     dispatch({ var: "page", type: "set", value: "AuctionEnd" });
   };
@@ -41,12 +39,7 @@ export default function Bidder() {
   const placedBid = async (bidderAddress, potBalance) => {
     dispatch({ var: "lastBidAddress", type: "set", value: bidderAddress });
     dispatch({ var: "potAmount", type: "set", value: fmt(potBalance) });
-    if (reach.addressEq(bidderAddress, state.account)) {
-      const balance = await getBalance(state.account);
-      dispatch({ var: "balance", type: "set", value: balance });
-    } else {
-      setPopupOpen(true);
-    }
+    if (!reach.addressEq(bidderAddress, state.account)) setPopupOpen(true);
   };
 
   const mayBid = async (bidAmount, potBalance) => {
