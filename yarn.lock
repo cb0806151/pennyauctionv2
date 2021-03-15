@@ -2264,10 +2264,10 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@reach-sh/stdlib@0.1.2-rc.25":
-  version "0.1.2-rc.25"
-  resolved "https://registry.yarnpkg.com/@reach-sh/stdlib/-/stdlib-0.1.2-rc.25.tgz#8104add4b78ee072f13035e4b694e2631e02e0b3"
-  integrity sha512-z9BGzjXABIWrIBYH5E60GcujYH7HpcIfB3vad2AX70UTAvQF+1Dcoy52rdgajntfgR8Ii1xJ98RuesPBwkOLQw==
+"@reach-sh/stdlib@0.1.2-rc.26":
+  version "0.1.2-rc.26"
+  resolved "https://registry.yarnpkg.com/@reach-sh/stdlib/-/stdlib-0.1.2-rc.26.tgz#e3936f917615ad909f5f8efb4fa4ffed0f2b4715"
+  integrity sha512-RVvzW0T7gat7JMPwPTTpIbyJK2hkVf1oqSb/zm5nUIJYbQDKnurMSBwvfmATv62sVoi9Diew2rBkAX8T4DXyVw==
   dependencies:
     algosdk reach-sh/js-algorand-sdk#246538f
     await-timeout "^0.6.0"
@@ -3088,7 +3088,7 @@ ajv@^7.0.2:
     superagent "^4.1.0"
     tweetnacl "^1.0.1"
 
-algosdk@reach-sh/js-algorand-sdk#246538f:
+"algosdk@github:reach-sh/js-algorand-sdk#246538f":
   version "1.7.2"
   resolved "https://codeload.github.com/reach-sh/js-algorand-sdk/tar.gz/246538ffbce3f9730b08afcdddb7c544a96e9b35"
   dependencies:
