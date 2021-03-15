@@ -1,4 +1,4 @@
-import * as reach from "@reach-sh/stdlib/ALGO";
+import * as reach from "@reach-sh/stdlib/ETH";
 
 export const getAddressWording = (address, targetAddress) => {
   let defaultAddress = "0x0000000000000000000000000000000000000000";

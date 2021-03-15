@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import * as backend from "../build/index.main.mjs";
-import * as reach from "@reach-sh/stdlib/ALGO";
+import * as reach from "@reach-sh/stdlib/ETH";
 import Popup from "../Components/Popup";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";

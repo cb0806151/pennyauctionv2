@@ -1,4 +1,4 @@
-import * as reach from "@reach-sh/stdlib/ALGO";
+import * as reach from "@reach-sh/stdlib/ETH";
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import Popup from "../Components/Popup";

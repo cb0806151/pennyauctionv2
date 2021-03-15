@@ -44,7 +44,7 @@ export const main =
                     .pay(potAmount);
 
             const [ currentPot, auctionRunning, winnerAddress ] =
-                parallel_reduce([ potAmount, true, initialAddress ])
+                parallelReduce([ potAmount, true, initialAddress ])
                 .invariant(balance() == currentPot)
                 .while(auctionRunning)
                 .case(Bidder, (() => ({

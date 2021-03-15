@@ -20,8 +20,7 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - run the `wsl` command to switch over to linux
 - run the `curl https://raw.githubusercontent.com/reach-sh/reach-lang/master/reach -o reach ; chmod +x reach` command to download reach into the src folder
 - run the `./reach version` command to ensure it installed
-- run the `./reach react` command. This will fail with errors, but it will compile the contract and start up ganache
-- press Ctrl + C to halt ./reach react
+- run the `./reach devnet` command (can also be run with `REACH_CONNECTOR_MODE=ALGO ./reach devnet` if the stdlib imports are swapped)
 - start up a new terminal and navigate to the pennyauctionv2 folder 
 - now run the `yarn start` command to run the application
 
@@ -33,9 +32,8 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - once that has completed run `cd src`
 - run the `curl https://raw.githubusercontent.com/reach-sh/reach-lang/master/reach -o reach ; chmod +x reach` command to download reach into the src folder
 - run the `./reach version` command to ensure it installed
-- run the `./reach react` command. This will fail with errors, but it will compile the contract + start up ganache
-- press Ctrl + C to halt ./reach react
-- run the `cd ..` command to navigate back to the pennyauctionv2 folder 
+- run the `./reach devnet` command (can also be run with `REACH_CONNECTOR_MODE=ALGO ./reach devnet` if the stdlib imports are swapped)
+- start up a new terminal and navigate to the pennyauctionv2 folder 
 - now run the `yarn start` command to run the application
 </p>
 </details>
@@ -163,8 +161,14 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 - change structure to only fetch balance when opening wallet dropdown  
 - show loading bar when depositing funds  
 - fix text glitch when the bidder joins a contract  
+- record the rest of the demo video  
 
-record the rest of the demo video  
+Post-competition
+
+3/15/2021
+- fix readme instructions
+- switch to ETH for `./reach devnet` testing
+
 </p>
 </details>
 <details><summary>Edgecases</summary>

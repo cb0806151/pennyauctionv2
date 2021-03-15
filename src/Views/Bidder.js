@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import Popup from "../Components/Popup";
 import { CoreState } from "../Util/CoreState";
 import * as backend from "../build/index.main.mjs";
-import * as reach from "@reach-sh/stdlib/ALGO";
+import * as reach from "@reach-sh/stdlib/ETH";
 import { getAddressWording } from "../Util/UtilityFunctions";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
