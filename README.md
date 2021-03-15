@@ -11,30 +11,18 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 <details><summary>Environment Setup Instructions</summary>
 <p>
 
-### Windows
-
 - clone the repository
-- open a terminal to the pennyauctionv2 folder 
+- open a terminal to the `pennyauctionv2` folder 
 - from there run the command `yarn install`
 - once that has completed run `cd src`
-- run the `wsl` command to switch over to linux
+- (if on Windows) run the `wsl` command to switch over to linux
 - run the `curl https://raw.githubusercontent.com/reach-sh/reach-lang/master/reach -o reach ; chmod +x reach` command to download reach into the src folder
 - run the `./reach version` command to ensure it installed
+- run the `./reach compile` command to build the contract
 - run the `./reach devnet` command (can also be run with `REACH_CONNECTOR_MODE=ALGO ./reach devnet` if the stdlib imports are swapped)
-- start up a new terminal and navigate to the pennyauctionv2 folder 
+- start up a new terminal and navigate to the `pennyauctionv2` folder 
 - now run the `yarn start` command to run the application
 
-### Linux
-
-- clone the repository
-- open a terminal to the pennyauctionv2 folder 
-- from there run the command `yarn install`
-- once that has completed run `cd src`
-- run the `curl https://raw.githubusercontent.com/reach-sh/reach-lang/master/reach -o reach ; chmod +x reach` command to download reach into the src folder
-- run the `./reach version` command to ensure it installed
-- run the `./reach devnet` command (can also be run with `REACH_CONNECTOR_MODE=ALGO ./reach devnet` if the stdlib imports are swapped)
-- start up a new terminal and navigate to the pennyauctionv2 folder 
-- now run the `yarn start` command to run the application
 </p>
 </details>
 <details><summary>Development Log</summary>
@@ -166,8 +154,9 @@ After each bid the deadline is reset to its initial value. However, if it ticks 
 Post-competition
 
 3/15/2021
-- fix readme instructions
-- switch to ETH for `./reach devnet` testing
+- fix readme environment setup instructions  
+- switch to ETH for `./reach devnet` testing  
+- consolidate environment setup instructions  
 
 </p>
 </details>
