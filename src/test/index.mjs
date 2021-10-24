@@ -12,7 +12,7 @@ const numberOfBidders = 2;
     const format = (x) => stdlib.formatCurrency(x, 4);
     const getBalance = async (who) => format(await stdlib.balanceOf(who));
     
-    const ctcAuctioneer = auctioneerAccount.deploy(backend);
+    const ctcAuctioneer = auctioneerAccount.contract(backend);
     const ctcInfo = ctcAuctioneer.getInfo();
 
     const formatAddress = (addressOrAccount) => {
@@ -45,7 +45,7 @@ const numberOfBidders = 2;
         }),
     ].concat(
         bidderAccounts.map((bidderAccount, i) => {
-            const ctcBidder = bidderAccount.attach(backend, ctcInfo);
+            const ctcBidder = bidderAccount.contract(backend, ctcInfo);
 
             return backend.Bidder(ctcBidder, {
                 ...Defaults(bidderAccount),
