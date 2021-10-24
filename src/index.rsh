@@ -16,18 +16,16 @@ const Auc = {
   updateBalance: Fun([UInt], Null),
 };
 const Bid = {
-  ...Defaults,
-  placedBid: Fun([Address, UInt], Null),
-  mayBid: Fun([UInt, UInt], Bool),
+  placedBid: Fun([Bool], Tuple(Address, UInt)),
 };
 
 export const main = Reach.App(() => {
   const Auctioneer = Participant("Auctioneer", Auc);
-  const Bidder = ParticipantClass("Bidder", Bid);
+  const Bidder = API("Bidder", Bid);
   deploy();
 
   const auctionEnds = (winnerAddress) => {
-    each([Auctioneer, Bidder], () => {
+    Auctioneer.only(() => {
       interact.auctionEnds(winnerAddress);
     });
   };
@@ -47,17 +45,16 @@ export const main = Reach.App(() => {
     parallelReduce([potAmount,true,initialAddress])
     .invariant(balance() == currentPot)
     .while(auctionRunning)
-    .case(Bidder, 
-        (() => ({
-          when: declassify(interact.mayBid(getBid(currentPot), currentPot))
-        })),
+    .api(Bidder.placedBid, 
         ((_) => getBid(currentPot)),
-        ((_) => {
+        ((canBid, k) => {
             const address = this;
             const bidValue = getBid(currentPot);
             const updatedPotValue = currentPot + bidValue;
-            Bidder.only(() => interact.placedBid(address, updatedPotValue));
             Auctioneer.only(() => interact.updateBalance(updatedPotValue));
+
+            k([address, bidValue])
+
             return [updatedPotValue, true, address];
         })
     )
