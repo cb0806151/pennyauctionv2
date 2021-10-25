@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
-import * as backend from "../build/index.main.mjs";
-import * as reach from "@reach-sh/stdlib/ETH";
+import * as backend from "../Contract/build/index.main.mjs";
 import Popup from "../Components/Popup";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -11,6 +10,11 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Typography from "@material-ui/core/Typography";
 import LoadingButton from "@material-ui/lab/LoadingButton";
+import { loadStdlib } from "@reach-sh/stdlib";
+const reach = loadStdlib({
+  REACH_CONNECTOR_MODE: "ALGO",
+  REACH_DEBUG: "yes",
+});
 
 export default function StartAuction() {
   const state = useContext(CoreState.State);
@@ -44,16 +48,17 @@ export default function StartAuction() {
   };
 
   const getParams = () => {
+    console.log(potAmount);
     const params = {
       deadline: deadline,
-      potAmount: reach.parseCurrency(potAmount),
+      potAmount: potAmount * 1000000,
       initialAddress: state.account,
     };
     return params;
   };
 
   const deploy = async () => {
-    const ctc = state.account.deploy(backend);
+    const ctc = state.account.contract(backend);
     backend.Auctioneer(ctc, { getParams, auctionEnds, updateBalance });
     const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
     dispatch({ var: "inviteLink", type: "set", value: ctcInfoStr });

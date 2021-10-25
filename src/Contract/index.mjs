@@ -6,7 +6,9 @@ const thread = async (f) => await f();
 const numberOfBidders = 2;
 
 (async () => {
-    const stdlib = await loadStdlib({REACH_DEBUG: 'yes'});
+    const stdlib = await loadStdlib(
+        // {REACH_DEBUG: 'yes'}
+        );
     const walletBalance = stdlib.parseCurrency(10);
     const auctioneerAccount = await stdlib.newTestAccount(walletBalance);
     const bidderAccounts = await Promise.all( Array.from({length: numberOfBidders}, () => stdlib.newTestAccount(walletBalance)));
@@ -74,7 +76,7 @@ const numberOfBidders = 2;
             },
         }),
         thread(await user('Alice')),
-        // thread(await user('Bob')),
+        thread(await user('Bob')),
     ])
     // .concat(
     //     bidderAccounts.map((bidderAccount, i) => {

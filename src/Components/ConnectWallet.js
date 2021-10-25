@@ -1,4 +1,3 @@
-import * as reach from "@reach-sh/stdlib/ETH";
 import React, { useContext, useState } from "react";
 import { CoreState } from "../Util/CoreState";
 import Popup from "../Components/Popup";
@@ -10,6 +9,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { loadStdlib } from "@reach-sh/stdlib";
+import MyAlgoConnect from "@reach-sh/stdlib/ALGO_MyAlgoConnect";
+const reach = loadStdlib("ALGO");
+reach.setWalletFallback(
+  reach.walletFallback({
+    providerEnv: "TestNet",
+    MyAlgoConnect,
+  })
+);
 
 export default function ConnectWallet() {
   const state = useContext(CoreState.State);

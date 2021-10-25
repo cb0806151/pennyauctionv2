@@ -51,10 +51,11 @@ export const main = Reach.App(() => {
             const address = this;
             const bidValue = getBid(currentPot);
             const updatedPotValue = currentPot + bidValue;
+
+            k([address, updatedPotValue])
+
             Auctioneer.only(() => interact.updateBalance(updatedPotValue));
-
-            k([address, bidValue])
-
+            
             return [updatedPotValue, true, address];
         })
     )

@@ -2,10 +2,8 @@ import * as reach from "@reach-sh/stdlib/ETH";
 
 export const getAddressWording = (address, targetAddress) => {
   let defaultAddress = "0x0000000000000000000000000000000000000000";
-  let addressesEquate = reach.addressEq(
-    address || defaultAddress,
-    targetAddress || defaultAddress
-  );
+  console.log(address, defaultAddress);
+  let addressesEquate = address === defaultAddress;
   if (addressesEquate) address = "You";
   if (address === undefined) address = "...";
   if (address !== undefined) address = `${address.substring(0, 5)}...`;
