@@ -5,10 +5,7 @@ import { Store } from "./Util/Store";
 import Stage from "./Views/Stage";
 
 export function renderDOM(application) {
-  ReactDOM.render(
-    <React.StrictMode>{application}</React.StrictMode>,
-    document.getElementById("root")
-  );
+  ReactDOM.render(application, document.getElementById("root"));
 }
 
 renderDOM(

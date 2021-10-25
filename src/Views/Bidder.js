@@ -18,14 +18,13 @@ const reach = loadStdlib({
 export default function Bidder() {
   const state = useContext(CoreState.State);
   const dispatch = useContext(CoreState.Dispatch);
-  const yesButton = useRef();
   const [popupOpen, setPopupOpen] = useState(false);
   const [interacts, setInteracts] = useState();
 
   const popupProps = {
     open: popupOpen,
     handleClose: () => setPopupOpen(false),
-    message: "Somone bid before you could",
+    message: "Someone bid before you could",
   };
 
   useEffect(() => {
@@ -34,46 +33,16 @@ export default function Bidder() {
 
   const fmt = (x) => reach.formatCurrency(x, 4);
 
-  const getBalance = async (who) => fmt(await reach.balanceOf(who));
-
-  const auctionEnds = async (winnerAddress) => {
-    dispatch({ var: "lastBidAddress", type: "set", value: winnerAddress });
-    dispatch({ var: "page", type: "set", value: "AuctionEnd" });
-  };
-
-  // const placedBid = async (bidderAddress, potBalance) => {
-  //   dispatch({ var: "lastBidAddress", type: "set", value: bidderAddress });
-  //   dispatch({ var: "potAmount", type: "set", value: fmt(potBalance) });
-  //   if (!reach.addressEq(bidderAddress, state.account)) setPopupOpen(true);
-  // };
-
   const placedBid = async () => {
     try {
       const [lastBidAddress, potAmount] = await interacts.placedBid(true);
       dispatch({ var: "lastBidAddress", type: "set", value: lastBidAddress });
       dispatch({ var: "potAmount", type: "set", value: fmt(potAmount) });
+      dispatch({ var: "bidAmount", type: "set", value: fmt(potAmount / 100) });
     } catch (e) {
       console.log(e);
       setPopupOpen(true);
     }
-    // if (!reach.addressEq(bidderAddress, state.account)) setPopupOpen(true);
-  };
-
-  const mayBid = async (bidAmount, potBalance) => {
-    const translatedBidAmount = fmt(bidAmount);
-    dispatch({ var: "bidAmount", type: "set", value: translatedBidAmount });
-    dispatch({ var: "mayBid", type: "set", value: true });
-    dispatch({ var: "potAmount", type: "set", value: fmt(potBalance) });
-    const balance = await getBalance(state.account);
-    const mayBid = balance > translatedBidAmount;
-    if (mayBid === false) return mayBid;
-    const bidStatus = await new Promise((resolve) => {
-      yesButton.current.addEventListener("click", (e) => resolve(true), {
-        once: true,
-      });
-    });
-    dispatch({ var: "mayBid", type: "set", value: false });
-    return bidStatus;
   };
 
   const attach = (ctcInfoStr) => {
@@ -95,7 +64,10 @@ export default function Bidder() {
       >
         <Typography gutterBottom variant="h5" component="h2">
           <Button variant="contained" style={{ marginRight: "10px" }}>
-            {getAddressWording(state.lastBidAddress, state.account)}{" "}
+            {getAddressWording(
+              state.lastBidAddress,
+              state.account.networkAccount.addr
+            )}{" "}
           </Button>
           made the last bid
         </Typography>
@@ -107,7 +79,6 @@ export default function Bidder() {
             : ` ${state.potAmount} ${state.applicationNetwork}`}
         </Typography>
         <Divider style={{ width: "50%", margin: "10px" }} />
-        {/* {state.mayBid ? ( */}
         <div
           style={{
             display: "flex",
@@ -123,11 +94,6 @@ export default function Bidder() {
             <Button onClick={placedBid}>Yes</Button>
           </ButtonGroup>
         </div>
-        {/*) : (
-          <Typography gutterBottom variant="h5" component="h5">
-            ...Waiting for next bidding cycle to start...
-          </Typography>
-        )} */}
       </CardContent>
       <Popup {...popupProps} />
     </Card>
