@@ -11,13 +11,11 @@ const numberOfBidders = 2;
         );
     const walletBalance = stdlib.parseCurrency(10);
     const auctioneerAccount = await stdlib.newTestAccount(walletBalance);
-    const bidderAccounts = await Promise.all( Array.from({length: numberOfBidders}, () => stdlib.newTestAccount(walletBalance)));
 
     const format = (x) => stdlib.formatCurrency(x, 4);
     const getBalance = async (who) => format(await stdlib.balanceOf(who));
     
     const ctcAuctioneer = auctioneerAccount.contract(backend);
-    const ctcInfo = ctcAuctioneer.getInfo();
 
     const formatAddress = (addressOrAccount) => {
         let address = addressOrAccount;
@@ -78,25 +76,4 @@ const numberOfBidders = 2;
         thread(await user('Alice')),
         thread(await user('Bob')),
     ])
-    // .concat(
-    //     bidderAccounts.map((bidderAccount, i) => {
-    //         const ctcBidder = bidderAccount.contract(backend, ctcInfo);
-
-    //         return backend.Bidder(ctcBidder, {
-    //             ...Defaults(bidderAccount),
-    //             placedBid: (bidderAddress, currentPotBalance) => {
-    //                 if (stdlib.addressEq(bidderAddress, bidderAccount)) {
-    //                     console.log(`${formatAddress(bidderAddress)} placed a bid, bringing the current pot balance up to ${format(currentPotBalance)}`);
-    //                 } else {
-    //                     console.log(`${formatAddress(bidderAccount)} saw that ${formatAddress(bidderAddress)} placed a bid, bringing the current pot balance up to ${format(currentPotBalance)}`);
-    //                 }
-    //             },
-    //             mayBid: async (bidAmount, currentPotBalance) => {
-    //                 const walletBalance = await getBalance(bidderAccount);
-    //                 const mayBet = (walletBalance > format(bidAmount)) && (Math.random() > 0.25);
-    //                 return mayBet;
-    //             }
-    //         })
-    //     })
-    // ))
 })();
